@@ -9,8 +9,7 @@ class StatefulPage extends StatefulWidget {
 }
 
 class _StatefulPageState extends State<StatefulPage> {
-  Color _color = Colors.red;
-  int _counter = 0;
+  // Add properties
 
   @override
   Widget build(BuildContext context) {
@@ -20,34 +19,29 @@ class _StatefulPageState extends State<StatefulPage> {
       ),
       body: Column(
         children: [
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
+          Container(
             decoration: BoxDecoration(
-              color: _color,
+              color: Colors.green,
               borderRadius: BorderRadius.circular(30),
             ),
             margin: const EdgeInsets.all(20),
-            child: Container(
-              height: 100,
-            ),
+            height: 100,
           ),
           PrimaryButton(
             text: 'Toggle Color',
             onPressed: () {
-              setState(() {
-                _color = _color == Colors.red ? Colors.blue : Colors.red;
-              });
+              //TODO: Implement function
             },
           ),
           const SizedBox(height: 10),
           PrimaryButton(
             text: 'Increase Counter',
             onPressed: () {
-              setState(() => _counter++);
+              //TODO: Implement counter function
             },
           ),
           const SizedBox(height: 10),
-          Text('Counter: $_counter'),
+          Text('SHow Counter here'),
         ],
       ),
     );
