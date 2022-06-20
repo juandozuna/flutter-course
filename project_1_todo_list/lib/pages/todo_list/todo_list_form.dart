@@ -24,39 +24,6 @@ class _TodoListFormState extends State<TodoListForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Row(
-        children: [
-          Expanded(
-            child: TLTextFormField(
-              label: 'Item',
-              onSaved: (val) => _item = val,
-              controller: _controller,
-              validator: MultiValidator([
-                RequiredValidator(errorText: 'This is a required field'),
-                MinLengthValidator(5, errorText: 'Minimum 5 characters'),
-              ]),
-            ),
-          ),
-          CircularIconButton(icon: Icons.add, onPressed: submitItem),
-          const SizedBox(width: 10),
-        ],
-      ),
     );
-  }
-
-  void submitItem() {
-    final formState = _formKey.currentState!;
-    final isValid = formState.validate();
-
-    if (isValid) {
-      formState.save();
-      widget.onSubmit(_item!);
-      clearForm();
-    }
-  }
-
-  void clearForm() {
-    FocusScope.of(context).requestFocus(FocusNode());
-    setState(() => _controller.clear());
   }
 }

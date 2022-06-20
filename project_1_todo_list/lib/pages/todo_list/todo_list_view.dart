@@ -13,21 +13,6 @@ class TodoListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) => _buildItem(context, index),
-    );
-  }
-
-  Widget _buildItem(BuildContext context, int index) {
-    final item = items[index];
-    return ListTile(
-      title: Text(item.item),
-      tileColor: index % 2 != 0 ? Colors.white : Colors.grey[200],
-      trailing: IconButton(
-        icon: const Icon(Icons.remove),
-        onPressed: () => onRemoved(index),
-      ),
-    );
+    return Container();
   }
 }

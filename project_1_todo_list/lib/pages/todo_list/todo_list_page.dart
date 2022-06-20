@@ -36,22 +36,14 @@ class _TodoListPageState extends State<TodoListPage> {
     );
   }
 
-  Widget _buildForm() => TodoListForm(
-        onSubmit: (item) => onAddedItem(item),
-      );
+  Widget _buildForm() => TodoListForm();
 
   Widget _buildList() => Expanded(
-        child: TodoListView(
-          items: items,
-          onRemoved: onRemove,
-        ),
+        child: TodoListView(),
       );
 
   void onAddedItem(String item) {
-    final newItem = TodoListModel(item: item, isDone: false);
-    setState(() {
-      items.add(newItem);
-    });
+    // Crear un nuevo item y agregarlo a la lista
   }
 
   void onRemove(int index) async {
@@ -60,27 +52,10 @@ class _TodoListPageState extends State<TodoListPage> {
       builder: (ctx) => _buildBottomSheet(ctx),
     );
 
-    if (result == true) {
-      setState(() {
-        items.removeAt(index);
-      });
-    }
+    // Si el usuario confirma que quiere eliminar remover del UI el item
   }
 
   Widget _buildBottomSheet(BuildContext ctx) {
-    return AlertDialog(
-      title: const Text('Are you sure?'),
-      actions: [
-        PrimaryButton(
-          label: 'NO',
-          onPressed: () => Navigator.of(ctx).pop(false),
-          color: Colors.red,
-        ),
-        PrimaryButton(
-          label: 'YES',
-          onPressed: () => Navigator.of(ctx).pop(true),
-        ),
-      ],
-    );
+    // Mostrar alerta de confirmacion para eliminar
   }
 }

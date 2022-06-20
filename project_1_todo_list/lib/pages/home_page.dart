@@ -13,13 +13,8 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: PrimaryButton(
           label: 'Comenzar!',
-          onPressed: () => goToList(context),
         ),
       ),
     );
-  }
-
-  void goToList(BuildContext context) {
-    Navigator.of(context).pushNamed(TodoListPage.routeName);
   }
 }
