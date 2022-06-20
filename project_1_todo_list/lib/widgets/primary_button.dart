@@ -4,12 +4,14 @@ class PrimaryButton extends StatelessWidget {
   final String label;
   final Widget? child;
   final VoidCallback? onPressed;
+  final Color? color;
 
   const PrimaryButton({
     Key? key,
     required this.label,
     this.onPressed,
     this.child,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -25,6 +27,7 @@ class PrimaryButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(100),
           ),
         ),
+        backgroundColor: color == null ? null : _propertySetter(color),
       ),
       child: child ?? Text(label),
     );
