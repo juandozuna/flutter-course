@@ -15,7 +15,15 @@ class GridViewPage extends StatelessWidget {
   }
 
   Widget _buildGridView() {
-    //TODO: implement Grid View
-    return Container();
+    final gridView = GridView.count(
+      crossAxisCount: 2,
+      children: List.generate(100, (index) {
+        return CommonWidgetContainer(
+          child: Text('Item $index'),
+        );
+      }),
+    );
+
+    return gridView;
   }
 }
