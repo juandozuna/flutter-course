@@ -12,6 +12,7 @@ class UserInputPage extends StatefulWidget {
 class _UserInputPageState extends State<UserInputPage> {
   final _nameController = TextEditingController();
   String labelName = '';
+  String? nameError;
   String description = '';
 
   @override
@@ -23,8 +24,9 @@ class _UserInputPageState extends State<UserInputPage> {
       body: Column(
         children: [
           TextField(
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Name',
+              errorText: nameError,
             ),
             controller: _nameController,
           ),
@@ -52,6 +54,15 @@ class _UserInputPageState extends State<UserInputPage> {
 
   void _updateName() {
     final text = _nameController.text;
+
+    if (text.length < 4) {
+      setState(() {
+        nameError = 'Name must be at least 4 characters';
+        labelName = '';
+      });
+      return;
+    }
+
     setState(() {
       if (text.isEmpty) {
         labelName = '';
