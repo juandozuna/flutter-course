@@ -10,7 +10,7 @@ class StatefulPage extends StatefulWidget {
 
 class _StatefulPageState extends State<StatefulPage> {
   Color _color = Colors.red;
-  int counter = 0;
+  int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,16 @@ class _StatefulPageState extends State<StatefulPage> {
                 _color = _color == Colors.red ? Colors.blue : Colors.red;
               });
             },
-          )
+          ),
+          const SizedBox(height: 10),
+          PrimaryButton(
+            text: 'Increase Counter',
+            onPressed: () {
+              setState(() => _counter++);
+            },
+          ),
+          const SizedBox(height: 10),
+          Text('Counter: $_counter'),
         ],
       ),
     );
