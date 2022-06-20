@@ -10,10 +10,12 @@ class UserInputPage extends StatefulWidget {
 }
 
 class _UserInputPageState extends State<UserInputPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   String labelName = '';
   String? nameError;
   String description = '';
+  String? formVal;
 
   @override
   Widget build(BuildContext context) {
@@ -21,33 +23,69 @@ class _UserInputPageState extends State<UserInputPage> {
       appBar: AppBar(
         title: const Text('User Input'),
       ),
-      body: Column(
-        children: [
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Name',
-              errorText: nameError,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    errorText: nameError,
+                  ),
+                  controller: _nameController,
+                ),
+                const SizedBox(height: 10),
+                if (labelName.isNotEmpty)
+                  CommonWidgetContainer(child: Text(labelName)),
+                const SizedBox(height: 10),
+                PrimaryButton(
+                  text: 'Update Name',
+                  onPressed: _updateName,
+                ),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'Description',
+                  ),
+                  onChanged: (val) => _updateDescription(val),
+                ),
+                const SizedBox(height: 10),
+                if (description.isNotEmpty)
+                  CommonWidgetContainer(child: Text(description)),
+              ],
             ),
-            controller: _nameController,
-          ),
-          const SizedBox(height: 10),
-          if (labelName.isNotEmpty)
-            CommonWidgetContainer(child: Text(labelName)),
-          const SizedBox(height: 10),
-          PrimaryButton(
-            text: 'Update Name',
-            onPressed: _updateName,
-          ),
-          TextField(
-            decoration: const InputDecoration(
-              labelText: 'Description',
+            Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: 'Email',
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    onSaved: (val) => formVal = val,
+                    validator: (val) {
+                      if (val == null || val.isEmpty) {
+                        return 'This is a required field';
+                      }
+                      // Validate email with regex
+                      final RegExp emailRegex = RegExp(
+                        r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
+                      );
+                      if (!emailRegex.hasMatch(val)) {
+                        return 'Invalid email';
+                      }
+                      return null;
+                    },
+                  ),
+                  PrimaryButton(text: 'Submit', onPressed: submitForm),
+                  if (formVal != null) Text(formVal!)
+                ],
+              ),
             ),
-            onChanged: (val) => _updateDescription(val),
-          ),
-          const SizedBox(height: 10),
-          if (description.isNotEmpty)
-            CommonWidgetContainer(child: Text(description)),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -76,5 +114,17 @@ class _UserInputPageState extends State<UserInputPage> {
     setState(() {
       description = value;
     });
+  }
+
+  void submitForm() {
+    final formState = _formKey.currentState!;
+    final isFormValid = formState.validate();
+    if (!isFormValid) {
+      return;
+    }
+
+    formState.save();
+
+    setState(() {});
   }
 }
