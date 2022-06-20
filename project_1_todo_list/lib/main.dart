@@ -11,13 +11,16 @@ class TodoListApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.cyan,
+        ),
+        routes: routes,
+        initialRoute: HomePage.routeName,
       ),
-      routes: routes,
-      initialRoute: HomePage.routeName,
     );
   }
 }
