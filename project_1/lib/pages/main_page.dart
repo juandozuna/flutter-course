@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_1/pages/common_widget_page.dart';
 import 'package:project_1/pages/grid_view_page.dart';
 import 'package:project_1/pages/stateful_page.dart';
+import 'package:project_1/pages/user_input_page.dart';
 
 class _ListItem {
   final String title;
@@ -20,6 +21,7 @@ class MainPage extends StatelessWidget {
       _ListItem('Stateful Widget', const StatefulPage()),
       _ListItem('Common Widgets', const CommonWidgetPage()),
       _ListItem('GridView', const GridViewPage()),
+      _ListItem('User Input', const UserInputPage()),
     ];
 
     return Scaffold(
