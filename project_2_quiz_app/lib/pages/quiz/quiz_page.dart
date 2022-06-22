@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_2_quiz_app/data/question_data.dart';
+import 'package:project_2_quiz_app/pages/end_page.dart';
 import 'package:project_2_quiz_app/pages/quiz/widgets/single_question_view.dart';
 
 class QuizPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   final questions = questionData;
   final PageController _controller = PageController();
+  int countOfCorrectAnsweredQuestions = 0;
 
   int currentQuestionIndex = 0;
 
@@ -40,12 +42,13 @@ class _QuizPageState extends State<QuizPage> {
     return SingleQuestionView(
       question: question,
       questionIndex: index,
-      onAnswerSelected: _onAnswerSelected,
+      onNextPressed: _goToNextQuestion,
+      onAnsweredCorrectly: _onAnsweredCorrectly,
     );
   }
 
-  void _onAnswerSelected(int answerIndex) {
-    _goToNextQuestion();
+  void _onAnsweredCorrectly() {
+    countOfCorrectAnsweredQuestions++;
   }
 
   void _goToNextQuestion() {
@@ -64,6 +67,12 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   void _endQuiz() {
-    Navigator.of(context).pop();
+    Navigator.of(context).pushNamed(
+      EndPage.routeName,
+      arguments: EndPageArguments(
+        score: countOfCorrectAnsweredQuestions,
+        totalQuestions: questions.length,
+      ),
+    );
   }
 }

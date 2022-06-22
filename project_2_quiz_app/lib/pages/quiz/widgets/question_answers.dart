@@ -14,6 +14,7 @@ class QuestionAnswers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: answers
           .asMap()
           .entries
