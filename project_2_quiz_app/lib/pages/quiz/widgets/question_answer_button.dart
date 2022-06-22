@@ -16,26 +16,14 @@ class QuestionAnswerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: _createButtonContent(context),
+    return Center(
+      child: Text('Question Answer Button'),
     );
   }
 
   Widget _createButtonContent(BuildContext context) {
     final letter = ALPHABET[index].toUpperCase();
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-      decoration: BoxDecoration(
-        color: QuizColors.answerButton,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text(
-        '$letter. $answer',
-        style: Theme.of(context).primaryTextTheme.titleMedium,
-      ),
-    );
+    return Container();
   }
 }

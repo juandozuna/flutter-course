@@ -13,23 +13,10 @@ class QuestionAnswers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: answers
-          .asMap()
-          .entries
-          .map(
-            (entry) => QuestionAnswerButton(
-              answer: entry.value,
-              index: entry.key,
-              onPressed: () => _onAnswerSelected(entry.key),
-            ),
-          )
-          .toList(),
+    return Center(
+      child: Text('Question Answers'),
     );
   }
 
-  void _onAnswerSelected(int index) {
-    onAnswerSelected(index);
-  }
+  void _onAnswerSelected(int index) {}
 }

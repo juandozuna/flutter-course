@@ -20,58 +20,8 @@ class QuestionResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        isCorrect ? _buildSuccessResult(context) : _buildFailureResult(context),
-        const SizedBox(height: 10),
-        _buildContinueButton(),
-      ],
-    );
-  }
-
-  Widget _buildContinueButton() {
-    return PrimaryButton(text: 'Continuar', onPressed: onNextPressed);
-  }
-
-  Widget _buildFailureResult(BuildContext context) {
-    return Column(children: [
-      _buildImage(QuizAssets.failureIcon),
-      _buildText('Respuesta Incorrecta', context)
-    ]);
-  }
-
-  Widget _buildSuccessResult(BuildContext context) {
-    return Column(children: [
-      _buildImage(QuizAssets.successIcon),
-      _buildText('¡Correcto!', context)
-    ]);
-  }
-
-  Widget _buildImage(String imagePath) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100),
-        boxShadow: [
-          QuizShadows.primaryShadow,
-        ],
-      ),
-      child: Image.asset(
-        imagePath,
-        width: 100,
-        height: 100,
-      ),
-    );
-  }
-
-  Widget _buildText(String text, BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      margin: const EdgeInsets.all(8),
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: Theme.of(context).primaryTextTheme.headline2,
-      ),
+    return Center(
+      child: Text('Question Result'),
     );
   }
 }

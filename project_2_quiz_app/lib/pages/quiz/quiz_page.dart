@@ -25,15 +25,7 @@ class _QuizPageState extends State<QuizPage> {
       appBar: AppBar(
         title: const Text('Quiz App'),
       ),
-      body: PageView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _controller,
-        pageSnapping: true,
-        itemCount: questions.length,
-        itemBuilder: (context, index) {
-          return _buildQuestion(index);
-        },
-      ),
+      body: Text('Quiz Page'),
     );
   }
 
@@ -53,26 +45,13 @@ class _QuizPageState extends State<QuizPage> {
 
   void _goToNextQuestion() {
     if (currentQuestionIndex + 1 < questions.length) {
-      _controller.nextPage(
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeIn,
-      );
-      setState(() {
-        currentQuestionIndex++;
-      });
+      // Go to next question
+
       return;
     }
 
     _endQuiz();
   }
 
-  void _endQuiz() {
-    Navigator.of(context).pushNamed(
-      EndPage.routeName,
-      arguments: EndPageArguments(
-        score: countOfCorrectAnsweredQuestions,
-        totalQuestions: questions.length,
-      ),
-    );
-  }
+  void _endQuiz() {}
 }
