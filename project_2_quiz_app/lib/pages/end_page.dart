@@ -35,7 +35,9 @@ class EndPage extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text('Preguntas Corretas: ${args.score}', style: style),
                 const SizedBox(height: 10),
-                Text('Preguntas Incorrectas: ${args.score}', style: style),
+                Text(
+                    'Preguntas Incorrectas: ${args.totalQuestions - args.score}',
+                    style: style),
                 const SizedBox(height: 10),
               ],
             ),
