@@ -1,4 +1,6 @@
-class QuestionModel {
+import 'package:equatable/equatable.dart';
+
+class QuestionModel extends Equatable {
   final String questionText;
   final List<String> answers;
   final int correctAnswerIndex;
@@ -13,5 +15,16 @@ class QuestionModel {
     this.explanation,
   });
 
-  bool isCorrectAnswer(int index) => correctAnswerIndex == index;
+  bool isCorrectAnswer(int index) => correctAnswerIndex == index + 1;
+
+  @override
+  List<Object?> get props => [
+        questionText,
+        answers,
+        correctAnswerIndex,
+        explanation,
+      ];
+
+  @override
+  bool get stringify => true;
 }

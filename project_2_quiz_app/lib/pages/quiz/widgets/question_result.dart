@@ -20,8 +20,50 @@ class QuestionResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Question Result'),
+    return Column(
+      children: [
+        isCorrect
+            ? _buildSuccessfulResult(context)
+            : _buildFailedResult(context),
+        const SizedBox(height: 10),
+        PrimaryButton(
+          text: 'Continuar!',
+          onPressed: onNextPressed,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSuccessfulResult(BuildContext context) {
+    return _buildResult(QuizAssets.successIcon, '¡Correcto!', context);
+  }
+
+  Widget _buildFailedResult(BuildContext context) {
+    return _buildResult(QuizAssets.failureIcon, 'Incorrecto!', context);
+  }
+
+  Widget _buildResult(String image, String text, BuildContext context) {
+    return Column(
+      children: [
+        _buildImage(image),
+        const SizedBox(height: 10),
+        _buildText(text, context),
+      ],
+    );
+  }
+
+  Widget _buildImage(String image) {
+    return Image.asset(
+      image,
+      width: 100,
+      height: 100,
+    );
+  }
+
+  Widget _buildText(String text, BuildContext context) {
+    return Text(
+      text,
+      style: Theme.of(context).textTheme.headline6,
     );
   }
 }

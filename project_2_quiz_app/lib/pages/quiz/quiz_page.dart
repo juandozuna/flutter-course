@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_2_quiz_app/data/question_data.dart';
 import 'package:project_2_quiz_app/pages/end_page.dart';
 import 'package:project_2_quiz_app/pages/quiz/widgets/single_question_view.dart';
+import 'package:project_2_quiz_app/themes/theme.dart';
 
 class QuizPage extends StatefulWidget {
   static const String routeName = '/quiz';
@@ -13,7 +14,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  final questions = questionData;
+  final questions = questionData.toSet().toList();
   final PageController _controller = PageController();
   int countOfCorrectAnsweredQuestions = 0;
 
@@ -25,7 +26,12 @@ class _QuizPageState extends State<QuizPage> {
       appBar: AppBar(
         title: const Text('Quiz App'),
       ),
-      body: Text('Quiz Page'),
+      body: PageView.builder(
+        itemCount: questions.length,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (ctx, i) => _buildQuestion(i),
+        controller: _controller,
+      ),
     );
   }
 
@@ -45,13 +51,22 @@ class _QuizPageState extends State<QuizPage> {
 
   void _goToNextQuestion() {
     if (currentQuestionIndex + 1 < questions.length) {
-      // Go to next question
-
+      currentQuestionIndex++;
+      _controller.nextPage(
+        duration: const Duration(
+          milliseconds: QuizDurations.horizontalSlideDuration,
+        ),
+        curve: Curves.easeInOutExpo,
+      );
       return;
     }
 
     _endQuiz();
   }
 
-  void _endQuiz() {}
+  void _endQuiz() {
+    final arguments =
+        EndPageArguments(countOfCorrectAnsweredQuestions, questions.length);
+    Navigator.of(context).pushNamed(EndPage.routeName, arguments: arguments);
+  }
 }

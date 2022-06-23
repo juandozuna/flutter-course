@@ -22,7 +22,11 @@ class TodoListView extends StatelessWidget {
   Widget _buildItem(BuildContext context, int index) {
     final item = items[index];
     return ListTile(
-      title: Text(item.item),
+      title: Text(
+        item.item,
+        style: TextStyle(
+            fontWeight: item.isDone ? FontWeight.bold : FontWeight.w100),
+      ),
       tileColor: index % 2 != 0 ? Colors.white : Colors.grey[200],
       trailing: IconButton(
         icon: const Icon(Icons.remove),

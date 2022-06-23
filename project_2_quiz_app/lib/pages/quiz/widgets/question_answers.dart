@@ -13,10 +13,22 @@ class QuestionAnswers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Question Answers'),
+    return Column(
+      children: answers
+          .asMap()
+          .entries
+          .map(
+            (e) => QuestionAnswerButton(
+              answer: e.value,
+              index: e.key,
+              onPressed: () => _onAnswerSelected(e.key),
+            ),
+          )
+          .toList(),
     );
   }
 
-  void _onAnswerSelected(int index) {}
+  void _onAnswerSelected(int index) {
+    onAnswerSelected(index);
+  }
 }

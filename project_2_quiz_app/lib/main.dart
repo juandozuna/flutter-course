@@ -16,10 +16,8 @@ class QuizApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: QuizTheme.getTheme(),
-      home: Scaffold(
-          body: Center(
-        child: Text('Hello World !'),
-      )),
+      routes: routes,
+      initialRoute: StartPage.routeName,
     );
   }
 }
