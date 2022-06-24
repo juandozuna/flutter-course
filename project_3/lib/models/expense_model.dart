@@ -9,6 +9,8 @@ class ExpenseModel extends Equatable {
   final String description;
   final DateTime created;
 
+  int get weekDay => created.weekday;
+
   const ExpenseModel({
     required this.amount,
     required this.description,

@@ -18,5 +18,5 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(AppSizes.appBarHeight);
+  Size get preferredSize => const Size.fromHeight(AppValues.appBarHeight);
 }

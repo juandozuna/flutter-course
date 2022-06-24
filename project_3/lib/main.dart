@@ -5,7 +5,6 @@ import 'package:project_3/pages/home/home_page.dart';
 import 'package:project_3/theme.dart';
 
 void main() {
-  init();
   runApp(const MyApp());
 }
 
@@ -15,11 +14,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return registerInjector(
+      GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: const ExpensesApp());
+        child: const ExpensesApp(),
+      ),
+    );
   }
 }
 
