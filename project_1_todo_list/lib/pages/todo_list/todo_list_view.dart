@@ -22,6 +22,7 @@ class TodoListView extends StatelessWidget {
   Widget _buildItem(BuildContext context, int index) {
     final item = items[index];
     return ListTile(
+      key: ObjectKey(item),
       title: Text(item.item),
       tileColor: index % 2 != 0 ? Colors.white : Colors.grey[200],
       trailing: IconButton(
