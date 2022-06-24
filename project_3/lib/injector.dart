@@ -19,24 +19,25 @@ MultiProvider registerInjector(Widget child) {
 
   return MultiProvider(
     providers: [
-      ChangeNotifierProvider.value(value: injector<ExpensesProvider>()),
+      ChangeNotifierProvider(create: (_) => injector.get<ExpensesProvider>()),
     ],
     child: child,
   );
 }
 
 void _init() {
-  _registerRepositories();
+  _reigsterRepositories();
   _registerProviders();
 }
 
-void _registerRepositories() {
+void _reigsterRepositories() {
   injector.registerLazySingleton<DatabaseRepository>(
     () => DatabaseLocalRepository(),
   );
-
   injector.registerLazySingleton<ExpensesRepository>(
-    () => ExpensesLocalRepository(injector<DatabaseRepository>()),
+    () => ExpensesLocalRepository(
+      injector<DatabaseRepository>(),
+    ),
   );
 }
 

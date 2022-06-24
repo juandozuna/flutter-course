@@ -19,9 +19,9 @@ class DatabaseLocalRepository implements DatabaseRepository {
   Future<Database> _initDatabase() async {
     final String dbPath = await getDatabasesPath();
     return await openDatabase(
-      path.join(dbPath, 'db.db'),
+      path.join(dbPath, 'changeDbName.db'),
       onCreate: (db, version) async {
-        await db.execute(ExpenseModel.tableScript);
+        await db.execute(ExpenseModel.createTable);
       },
       version: 2,
     );
@@ -62,7 +62,7 @@ class DatabaseLocalRepository implements DatabaseRepository {
   }
 
   @override
-  Future<int> insert(String table, Map<String, Object> data) async {
+  Future<int> insert(String table, Map<String, dynamic> data) async {
     final Database db = await database;
     final res = await db.insert(
       table,

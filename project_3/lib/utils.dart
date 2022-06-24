@@ -15,8 +15,6 @@ Map<T, List<S>> groupBy<S, T>(Iterable<S> values, T Function(S) key) {
 }
 
 /// Utility method to get providers faster
-///
-
 T getProvider<T>(BuildContext context, [bool listen = true]) {
   return Provider.of<T>(context, listen: listen);
 }

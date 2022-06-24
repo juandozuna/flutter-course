@@ -8,70 +8,58 @@ class ExpensesProvider with ChangeNotifier {
 
   ExpensesProvider(this._expensesRepository);
 
-  final List<ExpenseModel> _expenses = [
-    ExpenseModel(amount: 23, description: 'Course', created: DateTime.now()),
-    ExpenseModel(
-      amount: 23,
-      description: 'Course',
-      created: DateTime.now().subtract(
-        const Duration(days: 1),
-      ),
-    ),
-    ExpenseModel(
-      amount: 23,
-      description: 'Course',
-      created: DateTime.now().subtract(
-        const Duration(days: 2),
-      ),
-    ),
-    ExpenseModel(
-      amount: 23,
-      description: 'Course',
-      created: DateTime.now().subtract(
-        const Duration(days: 3),
-      ),
-    ),
-    ExpenseModel(
-      amount: 23,
-      description: 'Course',
-      created: DateTime.now().subtract(
-        const Duration(days: 4),
-      ),
-    ),
-    ExpenseModel(
-      amount: 23,
-      description: 'Course',
-      created: DateTime.now().subtract(
-        const Duration(days: 5),
-      ),
-    ),
-    ExpenseModel(
-      amount: 23,
-      description: 'Course',
-      created: DateTime.now().subtract(
-        const Duration(days: 6),
-      ),
-    ),
-    ExpenseModel(
-      amount: 23,
-      description: 'Course',
-      created: DateTime.now().subtract(
-        const Duration(days: 7),
-      ),
-    ),
-    ExpenseModel(
-      amount: 23,
-      description: 'Course',
-      created: DateTime.now().subtract(
-        const Duration(days: 8),
-      ),
-    ),
-    ExpenseModel(
-      amount: 23,
-      description: 'Course',
-      created: DateTime.now().subtract(
-        const Duration(days: 9),
-      ),
-    ),
-  ];
+  bool isLoading = false;
+  List<ExpenseModel> _expenses = [];
+
+  void getExpensesFromRepo() async {
+    _startLoading();
+    try {
+      final expenses = await _expensesRepository.getExpenses();
+      _expenses = [...expenses];
+    } catch (e) {
+      print(e);
+    } finally {
+      _stopLoading();
+    }
+  }
+
+  void _startLoading() {
+    isLoading = true;
+    notifyListeners();
+  }
+
+  void _stopLoading() {
+    isLoading = false;
+    notifyListeners();
+  }
+
+  List<ExpenseModel> getSortedExpenses() {
+    return _expenses.toList()..sort((a, b) => b.created.compareTo(a.created));
+  }
+
+  ExpensesSummaryViewModel getSummaryViewModel() {
+    return ExpensesSummaryViewModel.initViewModel(_expenses);
+  }
+
+  void addExpenseItem(ExpenseModel expense) async {
+    _startLoading();
+    try {
+      await _expensesRepository.addExpense(expense);
+      _expenses.add(expense);
+    } catch (e) {
+      print(e);
+    } finally {
+      _stopLoading();
+    }
+  }
+
+  void addItem() {
+    final daysToAdd = _expenses.length;
+    final newItem = ExpenseModel(
+      amount: 60,
+      description: 'Curso',
+      created: DateTime.now().add(Duration(days: daysToAdd)),
+    );
+    addExpenseItem(newItem);
+  }
 }

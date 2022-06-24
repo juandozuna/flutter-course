@@ -1,5 +1,5 @@
 abstract class DatabaseRepository {
-  Future<int> insert(String table, Map<String, Object> data);
+  Future<int> insert(String table, Map<String, dynamic> data);
 
   Future<void> close();
 

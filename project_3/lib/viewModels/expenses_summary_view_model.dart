@@ -14,7 +14,25 @@ class ExpensesSummaryViewModel {
   });
 
   static ExpensesSummaryViewModel initViewModel(List<ExpenseModel> expenses) {
-    return ExpensesSummaryViewModel._(summaryItems: [], totalAmount: 123);
+    final totalAmount = expenses.map((e) => e.amount).reduce((a, b) => a + b);
+
+    final groupedByWeek =
+        groupBy<ExpenseModel, int>(expenses, (e) => e.weekDay);
+
+    final summaryItems = groupedByWeek.entries.map((e) {
+      final weekDay = e.key;
+      final amount = e.value.map((e) => e.amount).reduce((a, b) => a + b);
+      final percentage = (amount / totalAmount) * 100;
+      return ExpenseSummaryItem(
+        weekDay: weekDay,
+        amount: amount,
+        barPercentageFill: percentage,
+      );
+    }).toList()
+      ..sort((a, b) => a.weekDay.compareTo(b.weekDay));
+
+    return ExpensesSummaryViewModel._(
+        summaryItems: summaryItems, totalAmount: totalAmount);
   }
 }
 

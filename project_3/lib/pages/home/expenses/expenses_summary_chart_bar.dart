@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_3/util_extensions.dart';
 import 'package:project_3/utils.dart';
 import 'package:project_3/viewModels/expenses_summary_view_model.dart';
-import 'package:project_3/widgets/vertical_chart_bar.dart';
+import 'package:project_3/widgets/verticar_bar.dart';
 
 class ExpensesSummaryChartBar extends StatelessWidget {
   final ExpenseSummaryItem item;
@@ -15,7 +15,11 @@ class ExpensesSummaryChartBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [],
+      children: [
+        Text(item.amount.toCurrency()),
+        VerticarBar(percentage: item.barPercentageFill / 100),
+        Text(getWeekDayInitial(item.weekDay))
+      ],
     );
   }
 }

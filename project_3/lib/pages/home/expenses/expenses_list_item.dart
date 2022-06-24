@@ -15,8 +15,9 @@ class ExpensesListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        title: Text(expense.description),
-        subtitle: Text(expense.created.formatDate()));
+      title: Text(expense.description),
+      subtitle: Text(expense.created.formatDate()),
+    );
   }
 
   Widget _buildAmount(BuildContext context) {
