@@ -14,9 +14,12 @@ class VerticalChartBar extends StatelessWidget {
     return Stack(
       children: [
         _buildBar(),
-        _buildBar(
-          fillValue,
-          Theme.of(context).primaryColor,
+        Positioned(
+          bottom: 0,
+          child: _buildBar(
+            fillValue,
+            Theme.of(context).primaryColor,
+          ),
         )
       ],
     );
@@ -28,8 +31,8 @@ class VerticalChartBar extends StatelessWidget {
   ]) {
     final decimalPercentage = percentage / 100;
     return Container(
-      height: AppValues.verticalBarHeight,
-      width: AppValues.verticalBarWidth * decimalPercentage,
+      height: AppValues.verticalBarHeight * decimalPercentage,
+      width: AppValues.verticalBarWidth,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppValues.fullRadius),
         color: color,
