@@ -12,22 +12,6 @@ class ExpensesSummaryChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final expensesProvider = getProvider<ExpensesProvider>(context);
-    final viewModel = expensesProvider.getViewModel();
-
-    return SummaryCard(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: _buildChart(viewModel),
-      ),
-    );
-  }
-
-  List<Widget> _buildChart(ExpensesSummaryViewModel viewModel) {
-    final items = viewModel.summaryItems;
-
-    return items
-        .map((e) => ExpensesSummaryChartBar(key: ObjectKey(e), item: e))
-        .toList();
+    return SummaryCard(child: Container());
   }
 }

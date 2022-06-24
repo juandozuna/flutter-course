@@ -15,19 +15,7 @@ class ExpensesSummaryChartBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        FittedBox(
-          child: Text(
-            item.amount.toCurrency(),
-          ),
-        ),
-        const SizedBox(height: 8),
-        VerticalChartBar(fillValue: item.barPercentageFill),
-        const SizedBox(height: 8),
-        Text(
-          getWeekDayInitial(item.weekDay),
-        )
-      ],
+      children: [],
     );
   }
 }

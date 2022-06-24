@@ -74,31 +74,4 @@ class ExpensesProvider with ChangeNotifier {
       ),
     ),
   ];
-
-  void getExpenses() async {
-    final expenses = await _expensesRepository.getExpenses();
-    _expenses.clear();
-    _expenses.addAll(expenses);
-    notifyListeners();
-  }
-
-  void addExpense(ExpenseModel expense) {
-    _expenses.add(expense);
-    notifyListeners();
-  }
-
-  void deleteExpense(int i) {
-    _expenses.removeAt(i);
-    notifyListeners();
-  }
-
-  ExpensesSummaryViewModel getViewModel() {
-    return ExpensesSummaryViewModel.initViewModel(_expenses);
-  }
-
-  List<ExpenseModel> getExpenses() {
-    final sortedExpenses = _expenses.toList();
-    sortedExpenses.sort((a, b) => b.created.compareTo(a.created));
-    return sortedExpenses;
-  }
 }

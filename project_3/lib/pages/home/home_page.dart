@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_3/pages/home/expenses/expenses_list.dart';
-import 'package:project_3/pages/home/expenses/expenses_summary_chart.dart';
 import 'package:project_3/widgets/home_app_bar.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,12 +14,7 @@ class HomePage extends StatelessWidget {
 
   Widget _buildBody() {
     return Column(
-      children: const [
-        ExpensesSummaryChart(),
-        Expanded(
-          child: ExpensesList(),
-        )
-      ],
+      children: const [],
     );
   }
 }

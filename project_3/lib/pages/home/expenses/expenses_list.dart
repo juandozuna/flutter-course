@@ -8,20 +8,7 @@ class ExpensesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = getProvider<ExpensesProvider>(context);
-    final expenses = provider.getExpenses();
-
-    return ListView.builder(
-      itemCount: expenses.length,
-      itemBuilder: (ctx, i) {
-        final item = expenses[i];
-        return ExpensesListItem(
-          key: ObjectKey(item),
-          expense: item,
-          onTap: () => deleteItem(i),
-        );
-      },
-    );
+    return Container();
   }
 
   void deleteItem(int i) {
