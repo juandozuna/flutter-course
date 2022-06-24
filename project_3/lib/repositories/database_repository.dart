@@ -1,4 +1,4 @@
-abstract class DatabaseService {
+abstract class DatabaseRepository {
   Future<int> insert(String table, Map<String, Object> data);
 
   Future<void> close();

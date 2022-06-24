@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project_3/models/expense_model.dart';
+import 'package:project_3/repositories/expenses_repository.dart';
 import 'package:project_3/viewModels/expenses_summary_view_model.dart';
 
 class ExpensesProvider with ChangeNotifier {
+  final ExpensesRepository _expensesRepository;
+
+  ExpensesProvider(this._expensesRepository);
+
   final List<ExpenseModel> _expenses = [
     ExpenseModel(amount: 23, description: 'Course', created: DateTime.now()),
     ExpenseModel(

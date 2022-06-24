@@ -1,6 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
+import 'package:project_3/data/database_local_repository.dart';
+import 'package:project_3/data/expenses_local_repository.dart';
 import 'package:project_3/providers/expenses_provider.dart';
+import 'package:project_3/repositories/database_repository.dart';
+import 'package:project_3/repositories/expenses_repository.dart';
 import 'package:provider/provider.dart';
 
 final injector = GetIt.instance;
@@ -22,9 +26,22 @@ MultiProvider registerInjector(Widget child) {
 }
 
 void _init() {
+  _registerRepositories();
   _registerProviders();
 }
 
+void _registerRepositories() {
+  injector.registerLazySingleton<DatabaseRepository>(
+    () => DatabaseLocalRepository(),
+  );
+
+  injector.registerLazySingleton<ExpensesRepository>(
+    () => ExpensesLocalRepository(injector<DatabaseRepository>()),
+  );
+}
+
 void _registerProviders() {
-  injector.registerSingleton<ExpensesProvider>(ExpensesProvider());
+  injector.registerLazySingleton<ExpensesProvider>(
+    () => ExpensesProvider(injector<ExpensesRepository>()),
+  );
 }

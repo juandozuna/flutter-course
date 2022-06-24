@@ -3,7 +3,7 @@ import 'package:project_3/repositories/database_repository.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as path;
 
-class DatabaseLocalRepository implements DatabaseService {
+class DatabaseLocalRepository implements DatabaseRepository {
   Database? _database;
 
   Future<Database> get database async {
