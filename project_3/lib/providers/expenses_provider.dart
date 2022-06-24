@@ -75,6 +75,13 @@ class ExpensesProvider with ChangeNotifier {
     ),
   ];
 
+  void getExpenses() async {
+    final expenses = await _expensesRepository.getExpenses();
+    _expenses.clear();
+    _expenses.addAll(expenses);
+    notifyListeners();
+  }
+
   void addExpense(ExpenseModel expense) {
     _expenses.add(expense);
     notifyListeners();
