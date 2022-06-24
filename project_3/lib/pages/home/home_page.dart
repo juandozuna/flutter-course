@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_3/pages/home/home_app_bar.dart';
-import 'package:project_3/widgets/expenses/expenses_summary_chart.dart';
+import 'package:project_3/pages/home/expenses/expenses_list.dart';
+import 'package:project_3/pages/home/expenses/expenses_summary_chart.dart';
+import 'package:project_3/widgets/home_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,6 +18,9 @@ class HomePage extends StatelessWidget {
     return Column(
       children: const [
         ExpensesSummaryChart(),
+        Expanded(
+          child: ExpensesList(),
+        )
       ],
     );
   }

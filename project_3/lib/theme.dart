@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static MaterialColor swatch = Colors.purple;
-  static Color cardBackground = Colors.grey.shade200;
-  static Color shadow = Colors.black38;
+  static Color cardBackground = Colors.grey.shade300;
+  static Color shadow = Colors.black45;
   static const Color verticalBarBackground = Color.fromARGB(255, 189, 189, 189);
 }
 
@@ -14,6 +14,7 @@ class AppValues {
 
   /// Width
   static const double verticalBarWidth = 14.0;
+  static const double amountCircleWidth = 60.0;
 
   /// Radius
   static const double cardBorderRadius = 8.0;

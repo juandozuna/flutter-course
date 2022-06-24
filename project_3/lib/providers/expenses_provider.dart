@@ -3,7 +3,7 @@ import 'package:project_3/models/expense_model.dart';
 import 'package:project_3/viewModels/expenses_summary_view_model.dart';
 
 class ExpensesProvider with ChangeNotifier {
-  final List<ExpenseModel> expenses = [
+  final List<ExpenseModel> _expenses = [
     ExpenseModel(amount: 23, description: 'Course', created: DateTime.now()),
     ExpenseModel(
       amount: 23,
@@ -70,7 +70,23 @@ class ExpensesProvider with ChangeNotifier {
     ),
   ];
 
+  void addExpense(ExpenseModel expense) {
+    _expenses.add(expense);
+    notifyListeners();
+  }
+
+  void deleteExpense(int i) {
+    _expenses.removeAt(i);
+    notifyListeners();
+  }
+
   ExpensesSummaryViewModel getViewModel() {
-    return ExpensesSummaryViewModel.initViewModel(expenses);
+    return ExpensesSummaryViewModel.initViewModel(_expenses);
+  }
+
+  List<ExpenseModel> getExpenses() {
+    final sortedExpenses = _expenses.toList();
+    sortedExpenses.sort((a, b) => b.created.compareTo(a.created));
+    return sortedExpenses;
   }
 }

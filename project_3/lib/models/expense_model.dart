@@ -5,6 +5,9 @@ part 'expense_model.g.dart';
 
 @JsonSerializable()
 class ExpenseModel extends Equatable {
+  static const String tableName = 'expenses';
+
+  final int? id;
   final double amount;
   final String description;
   final DateTime created;
@@ -12,6 +15,7 @@ class ExpenseModel extends Equatable {
   int get weekDay => created.weekday;
 
   const ExpenseModel({
+    this.id,
     required this.amount,
     required this.description,
     required this.created,
@@ -23,7 +27,8 @@ class ExpenseModel extends Equatable {
   Map<String, dynamic> toJson() => _$ExpenseModelToJson(this);
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
+        id,
         amount,
         description,
         created,
@@ -31,4 +36,13 @@ class ExpenseModel extends Equatable {
 
   @override
   bool get stringify => true;
+
+  static String tableScript = """
+    CREATE TABLE $tableName (
+      id INTEGER PRIMARY KEY,
+      amount REAL,
+      description TEXT,
+      created DATETIME
+    )
+  """;
 }

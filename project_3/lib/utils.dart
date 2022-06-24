@@ -20,3 +20,25 @@ Map<T, List<S>> groupBy<S, T>(Iterable<S> values, T Function(S) key) {
 T getProvider<T>(BuildContext context, [bool listen = true]) {
   return Provider.of<T>(context, listen: listen);
 }
+
+// get weekday initial from int
+String getWeekDayInitial(int weekday) {
+  switch (weekday) {
+    case 1:
+      return 'M';
+    case 2:
+      return 'T';
+    case 3:
+      return 'W';
+    case 4:
+      return 'T';
+    case 5:
+      return 'F';
+    case 6:
+      return 'S';
+    case 7:
+      return 'S';
+    default:
+      return '';
+  }
+}
