@@ -11,7 +11,7 @@ class ExpensesProvider with ChangeNotifier {
   bool isLoading = false;
   List<ExpenseModel> _expenses = [];
 
-  void getExpensesFromRepo() async {
+  Future<void> getExpensesFromRepo() async {
     _startLoading();
     try {
       final expenses = await _expensesRepository.getExpenses();
@@ -45,7 +45,7 @@ class ExpensesProvider with ChangeNotifier {
     _startLoading();
     try {
       await _expensesRepository.addExpense(expense);
-      _expenses.add(expense);
+      await getExpensesFromRepo();
     } catch (e) {
       print(e);
     } finally {
@@ -61,5 +61,17 @@ class ExpensesProvider with ChangeNotifier {
       created: DateTime.now().add(Duration(days: daysToAdd)),
     );
     addExpenseItem(newItem);
+  }
+
+  void deleteExpense(int id) async {
+    _startLoading();
+    try {
+      await _expensesRepository.deleteExpense(id);
+      await getExpensesFromRepo();
+    } catch (e) {
+      print(e);
+    } finally {
+      _stopLoading();
+    }
   }
 }

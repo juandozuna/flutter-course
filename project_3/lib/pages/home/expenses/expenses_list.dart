@@ -20,8 +20,4 @@ class ExpensesList extends StatelessWidget {
             ),
           );
   }
-
-  void deleteItem(int i) {
-    print('deleteItem: $i');
-  }
 }

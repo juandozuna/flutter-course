@@ -19,7 +19,7 @@ class DatabaseLocalRepository implements DatabaseRepository {
   Future<Database> _initDatabase() async {
     final String dbPath = await getDatabasesPath();
     return await openDatabase(
-      path.join(dbPath, 'changeDbName.db'),
+      path.join(dbPath, 'name3.db'),
       onCreate: (db, version) async {
         await db.execute(ExpenseModel.createTable);
       },

@@ -65,3 +65,29 @@ class CurrencyInputFormatter extends TextInputFormatter {
         selection: TextSelection.collapsed(offset: newText.length));
   }
 }
+
+void showAppBottomSheet(BuildContext context, Widget child) {
+  showBottomSheet(
+      context: context,
+      builder: (ctx) {
+        return SingleChildScrollView(
+          child: Container(
+            decoration: const BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black38,
+                  blurRadius: 10,
+                  spreadRadius: 5,
+                )
+              ],
+              color: Colors.white,
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: child,
+            ),
+          ),
+        );
+      });
+}
