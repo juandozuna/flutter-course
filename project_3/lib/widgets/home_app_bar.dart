@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_3/providers/expenses_provider.dart';
+import 'package:project_3/pages/home/expenses/expense_form.dart';
 import 'package:project_3/theme.dart';
-import 'package:project_3/utils.dart';
 
 class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
   const HomeAppBar({Key? key}) : super(key: key);
@@ -20,8 +19,14 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   void addItem(BuildContext context) {
-    final provider = getProvider<ExpensesProvider>(context, false);
-    provider.addItem();
+    showModalBottomSheet(
+        context: context,
+        builder: (ctx) {
+          return Container(
+            padding: const EdgeInsets.all(8.0),
+            child: const ExpenseForm(),
+          );
+        });
   }
 
   @override
