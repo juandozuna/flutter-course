@@ -13,54 +13,31 @@ class KeyboardStateChanges extends StatelessWidget {
   }
 
   Widget _buildLandscape() {
-    return Column(
-      children: [
-        const TextField(
-          decoration: InputDecoration(
-            labelText: 'TextField',
-          ),
-        ),
-        Expanded(
-          child: Row(
-            children: const [
-              ColorContainer(
-                color: Colors.blue,
-                width: 100.0,
-                height: double.infinity,
-              ),
-              Expanded(
-                child: ColorContainer(
-                  color: Colors.green,
-                  height: double.infinity,
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
+    return Row(
+      children: _buildChildren(true),
     );
   }
 
   Widget _buildPortrait() {
     return Column(
-      children: const [
-        TextField(
-          decoration: InputDecoration(
-            labelText: 'TextField',
-          ),
-        ),
-        ColorContainer(
-          color: Colors.red,
-          width: double.infinity,
-          height: 100.0,
-        ),
-        Expanded(
-          child: ColorContainer(
-            color: Colors.amber,
-            width: double.infinity,
-          ),
-        )
-      ],
+      children: _buildChildren(),
     );
+  }
+
+  List<Widget> _buildChildren([bool isLandscape = false]) {
+    return [
+      ColorContainer(
+        color: Colors.red,
+        width: isLandscape ? 100 : double.infinity,
+        height: 100.0,
+      ),
+      Expanded(
+        child: ColorContainer(
+          color: Colors.amber,
+          width: isLandscape ? null : double.infinity,
+          height: isLandscape ? double.infinity : null,
+        ),
+      )
+    ];
   }
 }
