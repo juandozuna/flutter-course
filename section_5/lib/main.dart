@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:section_5/pages/navigation_page.dart';
-import 'package:section_5/pages/tab_bar_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
           selectedItemColor: Colors.white,
         ),
       ),
-      home: const TabBarPage(),
+      home: const NavigationPage(),
     );
   }
 }

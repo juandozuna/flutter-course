@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:section_5/widgets/CustomAppBar.dart';
+import 'package:section_5/widgets/app_drawer.dart';
 
 class NavigationPage extends StatelessWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class NavigationPage extends StatelessWidget {
       appBar: const CustomAppBar(
         title: 'Main Nav',
       ),
+      drawer: const AppDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
