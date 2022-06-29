@@ -11,6 +11,8 @@ class ExpensesProvider with ChangeNotifier {
   bool isLoading = false;
   List<ExpenseModel> _expenses = [];
 
+  bool get hasExpenses => _expenses.isNotEmpty;
+
   Future<void> getExpensesFromRepo() async {
     _startLoading();
     try {

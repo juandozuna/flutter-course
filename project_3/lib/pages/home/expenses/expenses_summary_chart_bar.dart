@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:project_3/theme.dart';
 import 'package:project_3/util_extensions.dart';
 import 'package:project_3/utils.dart';
 import 'package:project_3/viewModels/expenses_summary_view_model.dart';
+import 'package:project_3/widgets/horizontal_bar.dart';
 import 'package:project_3/widgets/verticar_bar.dart';
 
 class ExpensesSummaryChartBar extends StatelessWidget {
@@ -14,12 +16,19 @@ class ExpensesSummaryChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(item.amount.toCurrency()),
-        VerticarBar(percentage: item.barPercentageFill / 100),
-        Text(getWeekDayInitial(item.weekDay))
-      ],
-    );
+    final isBigScreen =
+        MediaQuery.of(context).size.width > AppScreenSizes.smWidth;
+    final percentage = item.barPercentageFill / 100;
+    final children = [
+      RotatedBox(
+        quarterTurns: isBigScreen ? -1 : 0,
+        child: Text(item.amount.toCurrency()),
+      ),
+      isBigScreen
+          ? HorizontalBar(percentage: percentage)
+          : VerticarBar(percentage: percentage),
+      Text(getWeekDayInitial(item.weekDay))
+    ];
+    return isBigScreen ? Row(children: children) : Column(children: children);
   }
 }

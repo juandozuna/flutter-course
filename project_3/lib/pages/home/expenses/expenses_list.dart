@@ -11,13 +11,22 @@ class ExpensesList extends StatelessWidget {
   Widget build(BuildContext context) {
     final expensesProvider = getProvider<ExpensesProvider>(context);
     final expenses = expensesProvider.getSortedExpenses();
-    return expensesProvider.isLoading
-        ? const CenterLoadingProgress()
-        : ListView.builder(
-            itemCount: expenses.length,
-            itemBuilder: (context, index) => ExpensesListItem(
-              expense: expenses[index],
-            ),
-          );
+
+    if (expensesProvider.isLoading) {
+      return const CenterLoadingProgress();
+    }
+
+    if (expenses.isEmpty) {
+      return const Center(
+        child: Text('Todavía no hay gastos'),
+      );
+    }
+
+    return ListView.builder(
+      itemCount: expenses.length,
+      itemBuilder: (context, index) => ExpensesListItem(
+        expense: expenses[index],
+      ),
+    );
   }
 }

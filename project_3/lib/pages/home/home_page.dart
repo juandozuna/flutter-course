@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_3/pages/home/expenses/expenses_list.dart';
 import 'package:project_3/pages/home/expenses/expenses_summary_chart.dart';
 import 'package:project_3/providers/expenses_provider.dart';
+import 'package:project_3/theme.dart';
 import 'package:project_3/utils.dart';
 import 'package:project_3/widgets/home_app_bar.dart';
 
@@ -30,12 +31,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildBody() {
-    return Column(
-      children: [
-        ExpensesSummaryChart(),
-        Expanded(child: ExpensesList()),
-      ],
-    );
+    return LayoutBuilder(builder: (context, constraints) {
+      final width = constraints.maxWidth;
+      if (width > AppScreenSizes.smWidth) {
+        return Row(
+          children: const [
+            ExpensesSummaryChart(),
+            Expanded(child: ExpensesList()),
+          ],
+        );
+      }
+      return Column(
+        children: const [
+          ExpensesSummaryChart(),
+          Expanded(child: ExpensesList()),
+        ],
+      );
+    });
   }
 
   void _getInitialData() {

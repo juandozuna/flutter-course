@@ -7,6 +7,10 @@ class AppColors {
   static const Color verticalBarBackground = Color.fromARGB(255, 189, 189, 189);
 }
 
+class AppScreenSizes {
+  static const double smWidth = 600;
+}
+
 class AppValues {
   /// Height
   static const double appBarHeight = kToolbarHeight;
