@@ -25,6 +25,10 @@ class NavigationPage extends StatelessWidget {
             label: 'Account',
           ),
         ],
+        currentIndex: 0,
+        onTap: (int index) {
+          print('index: $index');
+        },
       ),
     );
   }
