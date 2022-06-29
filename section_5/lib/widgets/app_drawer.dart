@@ -8,11 +8,14 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: <Widget>[
-          const DrawerHeader(
+          DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.teal,
+              color: Theme.of(context).primaryColor,
             ),
-            child: Text('Drawer Header'),
+            child: Text(
+              'Drawer Header',
+              style: Theme.of(context).primaryTextTheme.bodyText1,
+            ),
           ),
           ListTile(
             leading: const Icon(Icons.home),
