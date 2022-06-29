@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:section_5/widgets/CustomAppBar.dart';
+import 'package:section_5/widgets/custom_app_bar.dart';
 
 class TabBarPage extends StatefulWidget {
   const TabBarPage({Key? key}) : super(key: key);
@@ -24,6 +24,8 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final tabBar = TabBar(
+      indicatorColor: Colors.black,
+      indicatorWeight: 3,
       controller: _tabController,
       tabs: const <Tab>[
         Tab(
@@ -46,6 +48,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
         bottom: tabBar,
       ),
       body: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
         controller: _tabController,
         children: const <Widget>[
           Center(
@@ -60,6 +63,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
         ],
       ),
       bottomNavigationBar: Container(
+        color: Colors.amber,
         child: tabBar,
       ),
     );
