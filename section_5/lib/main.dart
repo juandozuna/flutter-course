@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:section_5/pages/navigation_page.dart';
 import 'package:section_5/pages/tab_bar_page.dart';
+import 'package:section_5/theme/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,13 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Colors.purple,
-          selectedItemColor: Colors.white,
-        ),
-      ),
+      theme: AppTheme.getTheme(),
       home: const NavigationPage(),
     );
   }
