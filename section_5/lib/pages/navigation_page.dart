@@ -28,7 +28,7 @@ class _NavigationPageState extends State<NavigationPage> {
   @override
   Widget build(BuildContext context) {
     final pages = <Widget>[
-      HomeNavigator(),
+      HomePage(),
       ResourcesPage(),
       AccountPage(),
     ];

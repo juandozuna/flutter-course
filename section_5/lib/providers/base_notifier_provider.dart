@@ -18,6 +18,7 @@ abstract class BaseNotifierProvider with ChangeNotifier {
 
   void setError(dynamic error) {
     this.error = error;
+    isLoading = false;
     notifyListeners();
   }
 }

@@ -3,11 +3,15 @@ import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:section_5/data/repositories/resources_data_repository.dart';
+import 'package:section_5/data/repositories/user_data_repository.dart';
 import 'package:section_5/data/services/resource_service.dart';
+import 'package:section_5/data/services/user_service.dart';
 import 'package:section_5/main.dart';
 import 'package:section_5/networking.dart';
 import 'package:section_5/providers/resources_provider.dart';
+import 'package:section_5/providers/users_provider.dart';
 import 'package:section_5/repositories/resources_repository.dart';
+import 'package:section_5/repositories/user_repository.dart';
 
 final _injector = GetIt.instance;
 
@@ -22,6 +26,7 @@ MultiProvider initProvider(Widget Function(BuildContext) builder) {
   return MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => get<ResourcesProvider>()),
+      ChangeNotifierProvider(create: (_) => get<UserProvider>()),
     ],
     builder: (c, child) => builder(c),
   );
@@ -41,11 +46,16 @@ void _registerInstances() {
 
 void _registerServices() {
   _injector.registerSingleton<ResourceService>(ResourceService(get<Dio>()));
+  _injector.registerSingleton<UserService>(UserService(get<Dio>()));
 }
 
 void _registerRepositories() {
   _injector.registerSingleton<ResourcesRepository>(
     ResourcesDataRepository(get<ResourceService>()),
+  );
+
+  _injector.registerSingleton<UserRepository>(
+    UserDataRepository(get<UserService>()),
   );
 }
 
@@ -56,6 +66,10 @@ void _registerNavKeys() {
 void _registerProviders() {
   _injector.registerSingleton(
     ResourcesProvider(get<ResourcesRepository>()),
+  );
+
+  _injector.registerSingleton(
+    UserProvider(get<UserRepository>()),
   );
 }
 
