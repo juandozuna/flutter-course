@@ -25,8 +25,9 @@ class ResourcesDataRepository implements ResourcesRepository {
   }
 
   @override
-  Future<List<Resource>> getResources() {
-    return _resourceService.getResources();
+  Future<List<Resource>> getResources() async {
+    final data = await _resourceService.getResources();
+    return data.data;
   }
 
   @override

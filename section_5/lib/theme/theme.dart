@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColor {
   static const Color primary = Colors.pink;
+  static const Color secondary = Colors.orange;
   static const Color white = Colors.white;
 }
 
@@ -12,6 +13,9 @@ class AppTheme {
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColor.primary,
         selectedItemColor: AppColor.white,
+      ),
+      appBarTheme: const AppBarTheme(
+        color: AppColor.secondary,
       ),
     );
   }

@@ -4,12 +4,13 @@ import 'package:section_5/models/resource_model.dart';
 
 part 'resource_service.g.dart';
 
-@RestApi(
-  baseUrl: 'https://reqres.in/api/',
-)
+@RestApi()
 abstract class ResourceService {
   factory ResourceService(Dio dio, {String baseUrl}) = _ResourceService;
 
   @GET('{resource}')
-  Future<List<Resource>> getResources();
+  Future<ResourcePagingResponse> getResources({
+    @Query('page') int? page,
+    @Query('per_page') int perPage = 12,
+  });
 }

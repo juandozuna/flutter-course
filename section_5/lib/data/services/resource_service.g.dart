@@ -9,29 +9,29 @@ part of 'resource_service.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps
 
 class _ResourceService implements ResourceService {
-  _ResourceService(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://reqres.in/api/';
-  }
+  _ResourceService(this._dio, {this.baseUrl});
 
   final Dio _dio;
 
   String? baseUrl;
 
   @override
-  Future<List<Resource>> getResources() async {
+  Future<ResourcePagingResponse> getResources({page, perPage = 12}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'per_page': perPage
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<Resource>>(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResourcePagingResponse>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '{resource}',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
-        .map((dynamic i) => Resource.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = ResourcePagingResponse.fromJson(_result.data!);
     return value;
   }
 
