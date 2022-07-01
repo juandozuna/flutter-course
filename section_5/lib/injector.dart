@@ -10,9 +10,14 @@ import 'package:section_5/repositories/resources_repository.dart';
 
 final _injector = GetIt.instance;
 
-MultiProvider initProvider(Widget Function(BuildContext) builder) {
-  _init();
+bool _alreadyRegistered = false;
 
+MultiProvider initProvider(Widget Function(BuildContext) builder) {
+  if (!_alreadyRegistered) {
+    _init();
+    _alreadyRegistered = true;
+  }
+  
   return MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => get<ResourcesProvider>()),

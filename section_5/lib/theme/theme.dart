@@ -16,6 +16,7 @@ class AppTheme {
       ),
       appBarTheme: const AppBarTheme(
         color: AppColor.secondary,
+        centerTitle: true,
       ),
     );
   }

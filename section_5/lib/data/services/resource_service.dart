@@ -11,6 +11,6 @@ abstract class ResourceService {
   @GET('{resource}')
   Future<ResourcePagingResponse> getResources({
     @Query('page') int? page,
-    @Query('per_page') int perPage = 12,
+    @Query('per_page') int perPage = 100,
   });
 }

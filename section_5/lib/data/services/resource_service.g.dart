@@ -16,7 +16,7 @@ class _ResourceService implements ResourceService {
   String? baseUrl;
 
   @override
-  Future<ResourcePagingResponse> getResources({page, perPage = 12}) async {
+  Future<ResourcePagingResponse> getResources({page, perPage = 100}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
