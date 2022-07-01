@@ -13,4 +13,7 @@ abstract class ResourceService {
     @Query('page') int? page,
     @Query('per_page') int perPage = 100,
   });
+
+  @POST('{resource}')
+  Future<Resource> createResource(@Body() Resource resource);
 }

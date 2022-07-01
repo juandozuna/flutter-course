@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:section_5/widgets/center_circular_loading.dart';
+import 'package:section_5/pages/resources/widgets/resources_form.dart';
 
 class ResourcesFormPage extends StatelessWidget {
   static const String routeName = '/resources/form';
@@ -12,9 +12,7 @@ class ResourcesFormPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Resources Form'),
       ),
-      body: Center(
-        child: CenterCircularLoading(),
-      ),
+      body: ResourcesForm(),
     );
   }
 }

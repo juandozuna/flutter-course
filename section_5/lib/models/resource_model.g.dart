@@ -7,7 +7,7 @@ part of 'resource_model.dart';
 // **************************************************************************
 
 Resource _$ResourceFromJson(Map<String, dynamic> json) => Resource(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       name: json['name'] as String,
       year: json['year'] as int,
       color: json['color'] as String,

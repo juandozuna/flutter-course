@@ -5,7 +5,7 @@ part 'resource_model.g.dart';
 
 @JsonSerializable()
 class Resource extends Equatable {
-  final int id;
+  final int? id;
 
   final String name;
 
@@ -17,7 +17,7 @@ class Resource extends Equatable {
   final String pantoneValue;
 
   const Resource({
-    required this.id,
+    this.id,
     required this.name,
     required this.year,
     required this.color,

@@ -11,6 +11,14 @@ class AppColor {
   static Color oddListItem = Colors.grey.shade100;
 }
 
+class AppValues {
+  static const double inputBorderRadius = 10;
+  static const double inputBorderWidth = 2;
+  
+  static const double horizontalMargin = 16;
+  static const double verticalMargin = 8;
+}
+
 class AppTheme {
   static ThemeData getTheme() {
     return ThemeData(

@@ -15,15 +15,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return initProvider(
-      (p0) => MaterialApp(
-        title: 'Flutter Demo',
-        theme: AppTheme.getTheme(),
-        initialRoute: NavigationPage.routeName,
-        routes: {
-          NavigationPage.routeName: (context) => NavigationPage(),
-          ResourcesFormPage.routeName: (context) => ResourcesFormPage(),
+      (p0) => GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
         },
-        navigatorKey: get<AppNavigatorKey>().mainKey,
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: AppTheme.getTheme(),
+          initialRoute: NavigationPage.routeName,
+          routes: {
+            NavigationPage.routeName: (context) => NavigationPage(),
+            ResourcesFormPage.routeName: (context) => ResourcesFormPage(),
+          },
+          navigatorKey: get<AppNavigatorKey>().mainKey,
+        ),
       ),
     );
   }

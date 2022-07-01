@@ -8,8 +8,9 @@ class ResourcesDataRepository implements ResourcesRepository {
   ResourcesDataRepository(this._resourceService);
 
   @override
-  Future<Resource> createResource(Resource resource) {
-    throw UnimplementedError();
+  Future<Resource> createResource(Resource resource) async {
+    await _resourceService.createResource(resource);
+    return resource;
   }
 
   @override
