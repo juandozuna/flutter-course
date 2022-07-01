@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:section_5/core/color.dart';
 import 'package:section_5/models/resource_model.dart';
+import 'package:section_5/theme/theme.dart';
 
 class ResourceListItem extends StatelessWidget {
   final Resource resource;
@@ -32,10 +33,19 @@ class ResourceListItem extends StatelessWidget {
         ],
         motion: const ScrollMotion(),
       ),
-      child: ListTile(
-        tileColor: color.withAlpha(60),
-        leading: colorIndicator(color),
-        title: Text(resource.name),
+      child: Column(
+        children: [
+          ListTile(
+            tileColor: color.withAlpha(60),
+            leading: colorIndicator(color),
+            title: Text(resource.name),
+          ),
+          Divider(
+            color: AppColor.black,
+            thickness: 1,
+            height: 1,
+          )
+        ],
       ),
     );
   }
