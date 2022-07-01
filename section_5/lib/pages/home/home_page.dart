@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:section_5/injector.dart';
+import 'package:section_5/main.dart';
 import 'package:section_5/pages/home/home_second_page.dart';
 
 class HomeNavigatorRoutes {
-  static GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
   static const String home = '/home_intial';
   static const String homeSecond = '/home_second';
 }
@@ -18,7 +19,7 @@ class _HomeNavigatorState extends State<HomeNavigator> {
   @override
   Widget build(BuildContext context) {
     return Navigator(
-      key: HomeNavigatorRoutes.navigator,
+      key: get<AppNavigatorKey>().mainKey,
       initialRoute: HomeNavigatorRoutes.home,
       onGenerateRoute: (RouteSettings settings) {
         final name = settings.name;

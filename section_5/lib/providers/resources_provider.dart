@@ -5,6 +5,7 @@ import 'package:section_5/repositories/resources_repository.dart';
 class ResourcesProvider extends BaseNotifierProvider {
   final ResourcesRepository _resourcesRepository;
 
+  bool isInitialLoad = true;
   List<Resource> _loadedResources = [];
 
   List<Resource> get resources => _loadedResources;
@@ -19,7 +20,21 @@ class ResourcesProvider extends BaseNotifierProvider {
   }
 
   Future<void> getResources() async {
-    final resources = await _resourcesRepository.getResources();
-    _setResources(resources);
+    if (isInitialLoad) {
+      isInitialLoad = false;
+      await _getResourcesRequest();
+    }
+  }
+
+  Future<void> _getResourcesRequest() async {
+    startLoading();
+    try {
+      final resources = await _resourcesRepository.getResources();
+      _setResources(resources);
+    } catch (e) {
+      setError(e);
+    } finally {
+      stopLoading();
+    }
   }
 }

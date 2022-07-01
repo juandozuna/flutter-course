@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:section_5/injector.dart';
+import 'package:section_5/main.dart';
 import 'package:section_5/pages/account/account_page.dart';
 import 'package:section_5/pages/home/home_page.dart';
 import 'package:section_5/pages/resources/resources_page.dart';
@@ -6,6 +8,8 @@ import 'package:section_5/widgets/custom_app_bar.dart';
 import 'package:section_5/widgets/app_drawer.dart';
 
 class NavigationPage extends StatefulWidget {
+  static const String routeName = '/';
+
   const NavigationPage({Key? key}) : super(key: key);
 
   @override
@@ -13,7 +17,13 @@ class NavigationPage extends StatefulWidget {
 }
 
 class _NavigationPageState extends State<NavigationPage> {
+  final _titles = [
+    'Home',
+    'Resources',
+    'Account',
+  ];
   int selectedIndex = 1;
+  String title = 'Resources';
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +35,10 @@ class _NavigationPageState extends State<NavigationPage> {
     return WillPopScope(
       onWillPop: () async {
         if (selectedIndex == 0) {
-          final canPop = HomeNavigatorRoutes.navigator.currentState!.canPop();
+          final key = get<AppNavigatorKey>().mainKey;
+          final canPop = key.currentState!.canPop();
           if (canPop) {
-            HomeNavigatorRoutes.navigator.currentState!.pop();
+            key.currentState!.pop();
             return false;
           }
           return true;
@@ -36,8 +47,8 @@ class _NavigationPageState extends State<NavigationPage> {
         return true;
       },
       child: Scaffold(
-        appBar: const CustomAppBar(
-          title: 'Main Nav',
+        appBar: CustomAppBar(
+          title: title,
         ),
         drawer: const AppDrawer(),
         body: pages[selectedIndex],
@@ -58,7 +69,10 @@ class _NavigationPageState extends State<NavigationPage> {
           ],
           currentIndex: selectedIndex,
           onTap: (int index) {
-            setState(() => selectedIndex = index);
+            setState(() {
+              selectedIndex = index;
+              title = _titles[index];
+            });
           },
         ),
       ),

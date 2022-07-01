@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 abstract class BaseNotifierProvider with ChangeNotifier {
   bool isLoading = false;
-  Exception? error;
+  dynamic error;
 
   bool get hasError => error != null;
 
@@ -16,7 +16,7 @@ abstract class BaseNotifierProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setError(Exception error) {
+  void setError(dynamic error) {
     this.error = error;
     notifyListeners();
   }

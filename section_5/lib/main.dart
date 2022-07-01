@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:section_5/injector.dart';
 import 'package:section_5/pages/navigation_page.dart';
+import 'package:section_5/pages/resources/resources_form_page.dart';
 import 'package:section_5/theme/theme.dart';
 
 void main() {
@@ -17,8 +18,18 @@ class MyApp extends StatelessWidget {
       (p0) => MaterialApp(
         title: 'Flutter Demo',
         theme: AppTheme.getTheme(),
-        home: const NavigationPage(),
+        initialRoute: NavigationPage.routeName,
+        routes: {
+          NavigationPage.routeName: (context) => NavigationPage(),
+          ResourcesFormPage.routeName: (context) => ResourcesFormPage(),
+        },
+        navigatorKey: get<AppNavigatorKey>().mainKey,
       ),
     );
   }
+}
+
+class AppNavigatorKey {
+  final mainKey = GlobalKey<NavigatorState>();
+  final homeKey = GlobalKey<NavigatorState>();
 }

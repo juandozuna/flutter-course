@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:section_5/data/repositories/resources_data_repository.dart';
 import 'package:section_5/data/services/resource_service.dart';
+import 'package:section_5/main.dart';
 import 'package:section_5/networking.dart';
 import 'package:section_5/providers/resources_provider.dart';
 import 'package:section_5/repositories/resources_repository.dart';
@@ -17,7 +18,7 @@ MultiProvider initProvider(Widget Function(BuildContext) builder) {
     _init();
     _alreadyRegistered = true;
   }
-  
+
   return MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => get<ResourcesProvider>()),
@@ -31,6 +32,7 @@ void _init() {
 }
 
 void _registerInstances() {
+  _registerNavKeys();
   _registerNetworkClient();
   _registerServices();
   _registerRepositories();
@@ -45,6 +47,10 @@ void _registerRepositories() {
   _injector.registerSingleton<ResourcesRepository>(
     ResourcesDataRepository(get<ResourceService>()),
   );
+}
+
+void _registerNavKeys() {
+  _injector.registerLazySingleton(() => AppNavigatorKey());
 }
 
 void _registerProviders() {
