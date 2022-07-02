@@ -15,7 +15,7 @@ class UserModel extends Equatable {
   @JsonKey(name: 'last_name')
   final String lastName;
 
-  final String avatar;
+  final String? avatar;
 
   const UserModel({
     required this.id,
