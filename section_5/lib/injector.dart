@@ -78,7 +78,10 @@ void _registerProviders() {
   );
 
   _injector.registerSingleton(
-    UserProvider(get<UserRepository>()),
+    UserProvider(
+      get<UserRepository>(),
+      get<AppNavigatorKey>().mainKey,
+    ),
   );
 
   _injector.registerSingleton(

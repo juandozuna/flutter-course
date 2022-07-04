@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:section_5/injector.dart';
 import 'package:section_5/pages/account/user_form_page.dart';
+import 'package:section_5/pages/home/camera_page.dart';
 import 'package:section_5/pages/initial_page.dart';
 import 'package:section_5/pages/login/login_page.dart';
 import 'package:section_5/pages/navigation_page.dart';
@@ -44,6 +45,7 @@ class AppMain extends StatelessWidget {
           NavigationPage.routeName: (context) => NavigationPage(),
           ResourcesFormPage.routeName: (context) => ResourcesFormPage(),
           UserFormPage.routeName: (context) => UserFormPage(),
+          CameraPage.routeName: (context) => CameraPage(),
         },
         navigatorKey: AppNavigatorKey.instance.mainKey,
       ),

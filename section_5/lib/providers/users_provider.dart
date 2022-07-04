@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:section_5/models/users/create_user_model.dart';
 import 'package:section_5/models/users/login_user_mode.dart';
 import 'package:section_5/models/users/user_model.dart';
@@ -6,13 +7,17 @@ import 'package:section_5/repositories/user_repository.dart';
 
 class UserProvider extends BaseNotifierProvider {
   final UserRepository _usersRepository;
+  final GlobalKey<NavigatorState> mainKey;
 
   List<UserModel> users = [];
   bool isInitialLoad = true;
 
   bool get noUsers => users.isEmpty;
 
-  UserProvider(this._usersRepository);
+  UserProvider(
+    this._usersRepository,
+    this.mainKey,
+  );
 
   void getUsers() async {
     startLoading();
@@ -75,5 +80,25 @@ class UserProvider extends BaseNotifierProvider {
     }
     stopLoading();
     return isSuccess;
+  }
+
+  Future<void> logOut() async {
+    startLoading();
+    try {
+      await _usersRepository.logout();
+    } catch (e) {
+      setError(e);
+    }
+    stopLoading();
+  }
+
+  void naviagteUserOnLogout() {
+    final nav = mainKey.currentState!;
+
+    while (nav.canPop()) {
+      nav.pop();
+    }
+
+    nav.pushNamed('/login');
   }
 }
