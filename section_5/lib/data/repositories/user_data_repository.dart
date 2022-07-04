@@ -27,6 +27,20 @@ class UserDataRepository implements UserRepository {
   }
 
   Future<void> performLogin(LoginUserModel user, bool storeDat) async {
-    _userLocalDataSource.storeUser(user);
+    final response = await _userService.loginUser(user);
+
+    if (!storeDat) return;
+
+    await _userLocalDataSource.storeToken(response.token);
+    await _userLocalDataSource.storeUser(user);
+  }
+
+  Future<bool> isUserLoggedIn() async {
+    final token = await _userLocalDataSource.getToken();
+    return token != null;
+  }
+
+  Future<void> logout() async {
+    _userLocalDataSource.deleteToken();
   }
 }

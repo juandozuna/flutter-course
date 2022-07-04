@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:section_5/providers/initialize_provider.dart';
+import 'package:section_5/widgets/center_circular_loading.dart';
 
 class InitialPage extends StatefulWidget {
   static const String routeName = '/';
@@ -20,8 +21,12 @@ class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Initial Page'),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Splash Screen'),
+          CenterCircularLoading(),
+        ],
       ),
     );
   }
