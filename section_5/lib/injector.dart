@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+import 'package:section_5/data/local_data/user_local_data_source.dart';
 import 'package:section_5/data/repositories/resources_data_repository.dart';
 import 'package:section_5/data/repositories/user_data_repository.dart';
 import 'package:section_5/data/services/resource_service.dart';
@@ -13,6 +14,7 @@ import 'package:section_5/providers/resources_provider.dart';
 import 'package:section_5/providers/users_provider.dart';
 import 'package:section_5/repositories/resources_repository.dart';
 import 'package:section_5/repositories/user_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final _injector = GetIt.instance;
 
@@ -40,6 +42,8 @@ void _init() {
 
 void _registerInstances() {
   _registerNavKeys();
+  _registerPackages();
+  _registerDataSources();
   _registerNetworkClient();
   _registerServices();
   _registerRepositories();
@@ -57,7 +61,10 @@ void _registerRepositories() {
   );
 
   _injector.registerSingleton<UserRepository>(
-    UserDataRepository(get<UserService>()),
+    UserDataRepository(
+      get<UserService>(),
+      get<UserLocalDataSource>(),
+    ),
   );
 }
 
@@ -76,6 +83,18 @@ void _registerProviders() {
 
   _injector.registerSingleton(
     InitializeProvider(get<AppNavigatorKey>().mainKey),
+  );
+}
+
+void _registerDataSources() {
+  _injector.registerLazySingleton(
+    () => UserLocalDataSource(get<SharedPreferences>()),
+  );
+}
+
+void _registerPackages() {
+  _injector.registerLazySingletonAsync<SharedPreferences>(
+    () => SharedPreferences.getInstance(),
   );
 }
 

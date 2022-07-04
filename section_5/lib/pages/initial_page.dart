@@ -1,14 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:section_5/pages/navigation_page.dart';
+import 'package:provider/provider.dart';
+import 'package:section_5/providers/initialize_provider.dart';
 
-class InitialPage extends StatelessWidget {
+class InitialPage extends StatefulWidget {
   static const String routeName = '/';
   const InitialPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    Navigator.of(context).pushNamed(NavigationPage.routeName);
+  State<InitialPage> createState() => _InitialPageState();
+}
 
-    return Container();
+class _InitialPageState extends State<InitialPage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, init);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text('Initial Page'),
+      ),
+    );
+  }
+
+  void init() {
+    Provider.of<InitializeProvider>(context, listen: false).initialize();
   }
 }

@@ -1,12 +1,15 @@
+import 'package:section_5/data/local_data/user_local_data_source.dart';
 import 'package:section_5/data/services/user_service.dart';
 import 'package:section_5/models/users/create_user_model.dart';
+import 'package:section_5/models/users/login_user_mode.dart';
 import 'package:section_5/models/users/user_model.dart';
 import 'package:section_5/repositories/user_repository.dart';
 
 class UserDataRepository implements UserRepository {
   final UserService _userService;
+  final UserLocalDataSource _userLocalDataSource;
 
-  UserDataRepository(this._userService);
+  UserDataRepository(this._userService, this._userLocalDataSource);
 
   @override
   Future<List<UserModel>> getUsers() async {
@@ -21,5 +24,9 @@ class UserDataRepository implements UserRepository {
 
   Future<CreateUserResponse> createUser(CreateUserRequest request) async {
     return _userService.createUser(request);
+  }
+
+  Future<void> performLogin(LoginUserModel user, bool storeDat) async {
+    _userLocalDataSource.storeUser(user);
   }
 }
