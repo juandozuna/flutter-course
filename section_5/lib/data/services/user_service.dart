@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:section_5/models/users/create_user_model.dart';
+import 'package:section_5/models/users/login_model.dart';
 import 'package:section_5/models/users/user_model.dart';
 
 part 'user_service.g.dart';
@@ -20,4 +21,7 @@ abstract class UserService {
 
   @POST('users')
   Future<CreateUserResponse> createUser(@Body() CreateUserRequest request);
+
+  @POST('login')
+  Future<TokenResponse> logInUser(@Body() LoginUserRequest request);
 }

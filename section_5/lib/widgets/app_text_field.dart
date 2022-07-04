@@ -9,12 +9,14 @@ class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final void Function(String)? onChanged;
   final void Function(String?)? onSaved;
+  final void Function(String)? onFieldSubmitted;
   final FocusNode? focusNode;
   final FocusNode? nextFocusNode;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
   final List<FieldValidator>? validators;
+  final bool obscureText;
 
   const AppTextField({
     Key? key,
@@ -29,6 +31,8 @@ class AppTextField extends StatelessWidget {
     this.validators,
     this.textInputAction,
     this.keyboardType,
+    this.obscureText = false,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -61,12 +65,17 @@ class AppTextField extends StatelessWidget {
         keyboardType: keyboardType,
         inputFormatters: inputFormatters,
         validator: multiValidator,
+        obscureText: obscureText,
         textInputAction: nextFocusNode == null
             ? (textInputAction ?? TextInputAction.done)
             : TextInputAction.next,
         onFieldSubmitted: (String value) {
           if (nextFocusNode != null) {
             nextFocusNode!.requestFocus();
+          }
+
+          if (onFieldSubmitted != null) {
+            onFieldSubmitted!(value);
           }
         },
       ),

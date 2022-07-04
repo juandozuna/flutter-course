@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:section_5/injector.dart';
 import 'package:section_5/pages/account/user_form_page.dart';
+import 'package:section_5/pages/home/second_page.dart';
+import 'package:section_5/pages/login_page.dart';
 import 'package:section_5/pages/navigation_page.dart';
 import 'package:section_5/pages/resources/resources_form_page.dart';
+import 'package:section_5/pages/splash_screen_page.dart';
 import 'package:section_5/theme/theme.dart';
 
 void main() {
@@ -23,11 +26,14 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Flutter Demo',
           theme: AppTheme.getTheme(),
-          initialRoute: NavigationPage.routeName,
+          initialRoute: SplashScreenPage.routeName,
           routes: {
             NavigationPage.routeName: (context) => NavigationPage(),
             ResourcesFormPage.routeName: (context) => ResourcesFormPage(),
             UserFormPage.routeName: (context) => UserFormPage(),
+            SplashScreenPage.routeName: (context) => SplashScreenPage(),
+            LoginPage.routeName: (context) => LoginPage(),
+            SecondPage.routeName: (context) => SecondPage(),
           },
           navigatorKey: get<AppNavigatorKey>().mainKey,
         ),

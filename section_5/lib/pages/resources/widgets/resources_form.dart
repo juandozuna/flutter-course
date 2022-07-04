@@ -14,7 +14,14 @@ import 'package:section_5/widgets/app_text_field.dart';
 import 'package:section_5/widgets/center_circular_loading.dart';
 
 class ResourcesForm extends StatefulWidget {
-  const ResourcesForm({Key? key}) : super(key: key);
+  final Resource? resource;
+
+  bool get isEditing => resource != null;
+
+  const ResourcesForm({
+    Key? key,
+    this.resource,
+  }) : super(key: key);
 
   @override
   State<ResourcesForm> createState() => _ResourcesFormState();
@@ -32,6 +39,16 @@ class _ResourcesFormState extends State<ResourcesForm> {
   String? _pantoneValue;
 
   Color? _colorPickerColor;
+
+  @override
+  void initState() {
+    if (widget.isEditing) {
+      final color = HexColor(widget.resource!.color);
+      _color = color;
+      _colorPickerColor = color;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +72,7 @@ class _ResourcesFormState extends State<ResourcesForm> {
                 ],
                 onSaved: (value) => _name = value,
                 nextFocusNode: _yearNode,
+                initialValue: widget.resource?.name,
               ),
               AppTextField(
                 focusNode: _yearNode,
@@ -72,6 +90,7 @@ class _ResourcesFormState extends State<ResourcesForm> {
                       errorText: 'Year must be less than 2022'),
                 ],
                 onSaved: (value) => _year = int.tryParse(value ?? '0'),
+                initialValue: widget.resource?.year.toString(),
               ),
               AppTextField(
                 focusNode: _pantoneValueNode,
@@ -82,6 +101,7 @@ class _ResourcesFormState extends State<ResourcesForm> {
                   PatternValidator(r'^\d{2}-{1}\d{4}',
                       errorText: 'Invalid pantone value (##-####)'),
                 ],
+                initialValue: widget.resource?.pantoneValue,
               ),
               _buildColorPicker(),
             ],
@@ -100,7 +120,9 @@ class _ResourcesFormState extends State<ResourcesForm> {
           width: double.infinity,
           child: Text('Submit'),
         ),
-        onPressed: () {},
+        onPressed: () {
+          submitForm();
+        },
       ),
     );
   }
@@ -164,7 +186,7 @@ class _ResourcesFormState extends State<ResourcesForm> {
     return isFormValid && hasColor;
   }
 
-  void submitForm() {
+  void submitForm() async {
     final form = _formKey.currentState!;
 
     final isValid = validateForm();
@@ -184,6 +206,13 @@ class _ResourcesFormState extends State<ResourcesForm> {
     );
 
     final provider = get<ResourcesProvider>();
-    provider.addResource(resource);
+
+    if (widget.isEditing) {
+      await provider.updateResource(widget.resource!.id!, resource);
+    } else {
+      provider.addResource(resource);
+    }
+
+    Navigator.of(context).pop();
   }
 }
