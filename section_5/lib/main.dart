@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:section_5/injector.dart';
 import 'package:section_5/pages/account/user_form_page.dart';
+import 'package:section_5/pages/initial_page.dart';
 import 'package:section_5/pages/navigation_page.dart';
 import 'package:section_5/pages/resources/resources_form_page.dart';
 import 'package:section_5/theme/theme.dart';
@@ -23,8 +24,9 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Flutter Demo',
           theme: AppTheme.getTheme(),
-          initialRoute: NavigationPage.routeName,
+          initialRoute: InitialPage.routeName,
           routes: {
+            InitialPage.routeName: (context) => InitialPage(),
             NavigationPage.routeName: (context) => NavigationPage(),
             ResourcesFormPage.routeName: (context) => ResourcesFormPage(),
             UserFormPage.routeName: (context) => UserFormPage(),

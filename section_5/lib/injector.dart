@@ -8,6 +8,7 @@ import 'package:section_5/data/services/resource_service.dart';
 import 'package:section_5/data/services/user_service.dart';
 import 'package:section_5/main.dart';
 import 'package:section_5/networking.dart';
+import 'package:section_5/providers/initialize_provider.dart';
 import 'package:section_5/providers/resources_provider.dart';
 import 'package:section_5/providers/users_provider.dart';
 import 'package:section_5/repositories/resources_repository.dart';
@@ -27,6 +28,7 @@ MultiProvider initProvider(Widget Function(BuildContext) builder) {
     providers: [
       ChangeNotifierProvider(create: (_) => get<ResourcesProvider>()),
       ChangeNotifierProvider(create: (_) => get<UserProvider>()),
+      Provider(create: (_) => get<InitializeProvider>()),
     ],
     builder: (c, child) => builder(c),
   );
@@ -70,6 +72,10 @@ void _registerProviders() {
 
   _injector.registerSingleton(
     UserProvider(get<UserRepository>()),
+  );
+
+  _injector.registerSingleton(
+    InitializeProvider(get<AppNavigatorKey>().mainKey),
   );
 }
 

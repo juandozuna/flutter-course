@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:section_5/injector.dart';
-import 'package:section_5/main.dart';
+import 'package:flutter/services.dart';
 import 'package:section_5/pages/account/account_page.dart';
 import 'package:section_5/pages/home/home_page.dart';
 import 'package:section_5/pages/resources/resources_page.dart';
@@ -8,7 +7,7 @@ import 'package:section_5/widgets/custom_app_bar.dart';
 import 'package:section_5/widgets/app_drawer.dart';
 
 class NavigationPage extends StatefulWidget {
-  static const String routeName = '/';
+  static const String routeName = '/nav';
 
   const NavigationPage({Key? key}) : super(key: key);
 
@@ -34,17 +33,8 @@ class _NavigationPageState extends State<NavigationPage> {
     ];
     return WillPopScope(
       onWillPop: () async {
-        if (selectedIndex == 0) {
-          final key = get<AppNavigatorKey>().mainKey;
-          final canPop = key.currentState!.canPop();
-          if (canPop) {
-            key.currentState!.pop();
-            return false;
-          }
-          return true;
-        }
-
-        return true;
+        await SystemNavigator.pop(animated: false);
+        return false;
       },
       child: Scaffold(
         appBar: CustomAppBar(

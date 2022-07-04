@@ -50,4 +50,17 @@ class ResourcesProvider extends BaseNotifierProvider {
       stopLoading();
     }
   }
+
+  void updateResource(Resource resource) async {
+    startLoading();
+    try {
+      await _resourcesRepository.updateResource(resource);
+      final resources = await _resourcesRepository.getResources();
+      _setResources(resources);
+    } catch (e) {
+      setError(e);
+    } finally {
+      stopLoading();
+    }
+  }
 }
