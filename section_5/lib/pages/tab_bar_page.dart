@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:section_5/widgets/custom_app_bar.dart';
 
 class TabBarPage extends StatefulWidget {
   const TabBarPage({Key? key}) : super(key: key);
@@ -11,6 +10,7 @@ class TabBarPage extends StatefulWidget {
 class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
   // create a tab controller
   late final TabController _tabController;
+  String text = 'Tab 1';
 
   @override
   void initState() {
@@ -23,28 +23,30 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final tabs = [
+      Tab(
+        text: 'Home',
+      ),
+      Tab(
+        text: 'Resources',
+      ),
+      Tab(
+        text: 'Account',
+      ),
+    ];
     final tabBar = TabBar(
       indicatorColor: Colors.black,
       indicatorWeight: 3,
       controller: _tabController,
-      tabs: const <Tab>[
-        Tab(
-          text: 'Home',
-        ),
-        Tab(
-          text: 'Resources',
-        ),
-        Tab(
-          text: 'Account',
-        ),
-      ],
+      tabs: tabs,
       onTap: (int index) {
-        print('index: $index');
+        final title = tabs[index].text;
+        setState(() => text = title ?? '');
       },
     );
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tab Bar'),
+        title: Text(text),
         bottom: tabBar,
       ),
       body: TabBarView(

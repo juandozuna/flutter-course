@@ -8,8 +8,9 @@ class ResourcesDataRepository implements ResourcesRepository {
   ResourcesDataRepository(this._resourceService);
 
   @override
-  Future<Resource> createResource(Resource resource) {
-    throw UnimplementedError();
+  Future<Resource> createResource(Resource resource) async {
+    await _resourceService.createResource(resource);
+    return resource;
   }
 
   @override
@@ -25,8 +26,9 @@ class ResourcesDataRepository implements ResourcesRepository {
   }
 
   @override
-  Future<List<Resource>> getResources() {
-    return _resourceService.getResources();
+  Future<List<Resource>> getResources() async {
+    final data = await _resourceService.getResources();
+    return data.data;
   }
 
   @override
