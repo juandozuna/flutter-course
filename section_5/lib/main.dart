@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:section_5/injector.dart';
 import 'package:section_5/pages/account/user_form_page.dart';
 import 'package:section_5/pages/initial_page.dart';
-import 'package:section_5/pages/login_page.dart';
+import 'package:section_5/pages/login/login_page.dart';
 import 'package:section_5/pages/navigation_page.dart';
 import 'package:section_5/pages/resources/resources_form_page.dart';
 import 'package:section_5/theme/theme.dart';
@@ -19,20 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<MultiProvider>(
-      future: initProvider((_) => AppMain()),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return snapshot.data!;
-        } else {
-          return MaterialApp(
-            home: Scaffold(
-              body: CenterCircularLoading(),
-            ),
-          );
-        }
-      },
-    );
+    return initProvider((_) => AppMain());
   }
 }
 
@@ -58,13 +45,18 @@ class AppMain extends StatelessWidget {
           ResourcesFormPage.routeName: (context) => ResourcesFormPage(),
           UserFormPage.routeName: (context) => UserFormPage(),
         },
-        navigatorKey: get<AppNavigatorKey>().mainKey,
+        navigatorKey: AppNavigatorKey.instance.mainKey,
       ),
     );
   }
 }
 
 class AppNavigatorKey {
-  final mainKey = GlobalKey<NavigatorState>();
-  final homeKey = GlobalKey<NavigatorState>();
+  static AppNavigatorKey instance = AppNavigatorKey._();
+
+  late final GlobalKey<NavigatorState> mainKey;
+
+  AppNavigatorKey._() {
+    mainKey = GlobalKey<NavigatorState>();
+  }
 }

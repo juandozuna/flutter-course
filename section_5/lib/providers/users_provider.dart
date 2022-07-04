@@ -1,4 +1,5 @@
 import 'package:section_5/models/users/create_user_model.dart';
+import 'package:section_5/models/users/login_user_mode.dart';
 import 'package:section_5/models/users/user_model.dart';
 import 'package:section_5/providers/base_notifier_provider.dart';
 import 'package:section_5/repositories/user_repository.dart';
@@ -61,5 +62,18 @@ class UserProvider extends BaseNotifierProvider {
     }
 
     stopLoading();
+  }
+
+  Future<bool> login(LoginUserModel request) async {
+    startLoading();
+    bool isSuccess = false;
+    try {
+      await _usersRepository.performLogin(request, true);
+      isSuccess = true;
+    } catch (e) {
+      setError(e);
+    }
+    stopLoading();
+    return isSuccess;
   }
 }

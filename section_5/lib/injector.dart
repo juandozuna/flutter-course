@@ -20,10 +20,9 @@ final _injector = GetIt.instance;
 
 bool _alreadyRegistered = false;
 
-Future<MultiProvider> initProvider(
-    Widget Function(BuildContext) builder) async {
+MultiProvider initProvider(Widget Function(BuildContext) builder) {
   if (!_alreadyRegistered) {
-    await _init();
+    _init();
     _alreadyRegistered = true;
   }
 
@@ -37,13 +36,13 @@ Future<MultiProvider> initProvider(
   );
 }
 
-Future<void> _init() {
+void _init() {
   return _registerInstances();
 }
 
-Future<void> _registerInstances() async {
+void _registerInstances() async {
   _registerNavKeys();
-  await _registerPackages();
+  _registerPackages();
   _registerDataSources();
   _registerNetworkClient();
   _registerServices();
@@ -70,7 +69,7 @@ void _registerRepositories() {
 }
 
 void _registerNavKeys() {
-  _injector.registerLazySingleton(() => AppNavigatorKey());
+  _injector.registerSingleton(AppNavigatorKey.instance);
 }
 
 void _registerProviders() {
@@ -92,13 +91,14 @@ void _registerProviders() {
 
 void _registerDataSources() {
   _injector.registerLazySingleton(
-    () => UserLocalDataSource(get<SharedPreferences>()),
+    () => UserLocalDataSource(get<Future<SharedPreferences>>()),
   );
 }
 
-Future<void> _registerPackages() async {
-  final preferences = await SharedPreferences.getInstance();
-  _injector.registerSingleton<SharedPreferences>(preferences);
+void _registerPackages() {
+  _injector.registerSingleton<Future<SharedPreferences>>(
+    SharedPreferences.getInstance(),
+  );
 }
 
 void _registerNetworkClient() =>

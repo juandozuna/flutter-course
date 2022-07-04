@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:section_5/pages/login_page.dart';
+import 'package:section_5/pages/login/login_page.dart';
 import 'package:section_5/pages/navigation_page.dart';
 import 'package:section_5/repositories/user_repository.dart';
 
@@ -15,14 +15,14 @@ class InitializeProvider {
   void initialize() async {
     final navigator = mainKey.currentState!;
 
-    await Future.delayed(Duration(seconds: 3));
+    // await Future.delayed(Duration(seconds: 3));
 
     final isLoggedIn = await _userRepository.isUserLoggedIn();
 
     if (isLoggedIn) {
-      navigator.pushNamed(NavigationPage.routeName);
+      navigator.pushReplacementNamed(NavigationPage.routeName);
     } else {
-      navigator.pushNamed(LoginPage.routeName);
+      navigator.pushReplacementNamed(LoginPage.routeName);
     }
   }
 }

@@ -2,32 +2,37 @@ import 'package:section_5/models/users/login_user_mode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserLocalDataSource {
-  final SharedPreferences _preferences;
+  final Future<SharedPreferences> _preferences;
   String? _token;
 
   UserLocalDataSource(this._preferences);
 
   Future<void> storeToken(String token) async {
-    await _preferences.setString('token', token);
+    final prefs = await _preferences;
+    await prefs.setString('token', token);
     _token = token;
   }
 
-  String? getToken() {
-    return _preferences.getString('token');
+  Future<String?> getToken() async {
+    final prefs = await _preferences;
+    return prefs.getString('token');
   }
 
-  Future<void> storeUser(LoginUserModel user) {
-    return _preferences.setString('email', user.email);
+  Future<void> storeUser(LoginUserModel user) async {
+    final prefs = await _preferences;
+    prefs.setString('email', user.email);
   }
 
-  void deleteToken() {
-    _preferences.remove('token');
-    _preferences.remove('email');
+  void deleteToken() async {
+    final prefs = await _preferences;
+    prefs.remove('token');
+    prefs.remove('email');
     _token = null;
   }
 
-  LoginUserModel? getUser() {
-    final email = _preferences.getString('email');
+  Future<LoginUserModel?> getUser() async {
+    final prefs = await _preferences;
+    final email = prefs.getString('email');
 
     if (email == null) {
       return null;
