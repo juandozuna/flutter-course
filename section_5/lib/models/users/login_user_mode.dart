@@ -24,3 +24,23 @@ class LoginUserModel extends Equatable {
   @override
   bool get stringify => true;
 }
+
+@JsonSerializable()
+class TokenResponse extends Equatable {
+  final String token;
+
+  const TokenResponse({
+    required this.token,
+  });
+
+  factory TokenResponse.fromJson(Map<String, dynamic> json) =>
+      _$TokenResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TokenResponseToJson(this);
+
+  @override
+  List<Object?> get props => [token];
+
+  @override
+  bool get stringify => true;
+}

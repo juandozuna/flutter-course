@@ -17,3 +17,13 @@ Map<String, dynamic> _$LoginUserModelToJson(LoginUserModel instance) =>
       'email': instance.email,
       'password': instance.password,
     };
+
+TokenResponse _$TokenResponseFromJson(Map<String, dynamic> json) =>
+    TokenResponse(
+      token: json['token'] as String,
+    );
+
+Map<String, dynamic> _$TokenResponseToJson(TokenResponse instance) =>
+    <String, dynamic>{
+      'token': instance.token,
+    };
