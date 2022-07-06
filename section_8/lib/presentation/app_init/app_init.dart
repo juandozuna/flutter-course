@@ -11,6 +11,7 @@ class AppInit extends StatelessWidget {
     return MaterialApp(
       title: 'Section 8',
       theme: AppTheme.theme,
+      navigatorKey: AppRoute.navKey,
       initialRoute: AppRoute.splashScreen,
       routes: routeList,
     );
