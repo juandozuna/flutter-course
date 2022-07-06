@@ -5,9 +5,13 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:section_8/data/repositories/auth_data_repository.dart';
 import 'package:section_8/domain/repositories/auth_repository.dart';
+import 'package:section_8/domain/repositories/chat_repository.dart';
 import 'package:section_8/firebase_options.dart';
 import 'package:section_8/presentation/providers/auth_provider.dart';
+import 'package:section_8/presentation/providers/chat_provider.dart';
 import 'package:section_8/presentation/providers/init_provider.dart';
+
+import 'data/repositories/chat_data_repository.dart';
 
 final _injector = GetIt.instance;
 
@@ -23,6 +27,7 @@ List<SingleChildWidget> _getProviders() {
   return [
     Provider.value(value: get<InitProvider>()),
     ChangeNotifierProvider.value(value: get<AuthProvider>()),
+    ChangeNotifierProvider.value(value: get<ChatProvider>()),
   ];
 }
 
@@ -49,6 +54,10 @@ void _registerRepositories() {
   _injector.registerSingleton<AuthRepository>(
     AuthDataRepository(get<FirebaseAuth>()),
   );
+
+  _injector.registerSingleton<ChatRepository>(
+    ChatDataRepository(),
+  );
 }
 
 void _registerProviders() {
@@ -61,6 +70,13 @@ void _registerProviders() {
   _injector.registerSingleton<AuthProvider>(
     AuthProvider(
       get<AuthRepository>(),
+    ),
+  );
+
+  _injector.registerSingleton<ChatProvider>(
+    ChatProvider(
+      get<AuthRepository>(),
+      get<ChatRepository>(),
     ),
   );
 }
