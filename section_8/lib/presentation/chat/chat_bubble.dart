@@ -14,8 +14,8 @@ class ChatBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.only(
-      topLeft: Radius.circular(isMe ? 0 : AppValues.roundBorderRadius),
-      topRight: Radius.circular(isMe ? AppValues.roundBorderRadius : 0),
+      topLeft: Radius.circular(!isMe ? 0 : AppValues.roundBorderRadius),
+      topRight: Radius.circular(!isMe ? AppValues.roundBorderRadius : 0),
       bottomLeft: Radius.circular(AppValues.roundBorderRadius),
       bottomRight: Radius.circular(AppValues.roundBorderRadius),
     );
@@ -32,11 +32,11 @@ class ChatBubble extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: borderRadius,
-          color: isMe ? Theme.of(context).primaryColor : Colors.grey[300],
+          color: !isMe ? Theme.of(context).primaryColor : Colors.grey[300],
         ),
         child: Text(
           this.text,
-          textAlign: isMe ? TextAlign.left : TextAlign.right,
+          textAlign: !isMe ? TextAlign.left : TextAlign.right,
         ),
       ),
     );
@@ -47,9 +47,9 @@ class ChatBubble extends StatelessWidget {
 
     return Row(
       children: [
-        if (!isMe) sizedBox,
-        bubble,
         if (isMe) sizedBox,
+        bubble,
+        if (!isMe) sizedBox,
       ],
     );
   }

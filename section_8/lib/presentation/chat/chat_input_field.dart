@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:section_8/injector.dart';
 import 'package:section_8/presentation/constants/theme.dart';
+import 'package:section_8/presentation/providers/chat_provider.dart';
 
 class ChatInputField extends StatefulWidget {
   const ChatInputField({Key? key}) : super(key: key);
@@ -51,6 +53,9 @@ class _ChatInputFieldState extends State<ChatInputField> {
 
   void sendMessage() {
     final message = _textController.text;
+
+    final chatProvider = get<ChatProvider>();
+    chatProvider.sendMessage(message);
 
     setState(() => _textController.clear());
   }

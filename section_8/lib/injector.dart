@@ -61,7 +61,10 @@ void _registerRepositories() {
   );
 
   _injector.registerSingleton<ChatRepository>(
-    ChatDataRepository(),
+    ChatDataRepository(
+      get<AuthRepository>(),
+      get<FirebaseFirestore>(),
+    ),
   );
 }
 
