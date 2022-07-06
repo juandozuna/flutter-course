@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:section_8/injector.dart';
+import 'package:section_8/presentation/chat/chat_screen.dart';
 import 'package:section_8/presentation/providers/auth_provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -19,9 +20,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Text('Home Chat Screen'),
-      ),
+      body: ChatScreen(),
     );
   }
 }

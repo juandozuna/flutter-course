@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:section_8/domain/repositories/auth_repository.dart';
 import 'package:section_8/presentation/constants/routes.dart';
 import 'package:section_8/presentation/providers/base_notifier_provider.dart';
