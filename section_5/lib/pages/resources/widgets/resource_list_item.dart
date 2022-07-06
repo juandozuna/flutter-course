@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:section_5/core/color.dart';
 import 'package:section_5/models/resource_model.dart';
+import 'package:section_5/pages/resources/resources_form_page.dart';
 import 'package:section_5/theme/theme.dart';
 
 class ResourceListItem extends StatelessWidget {
@@ -20,7 +21,7 @@ class ResourceListItem extends StatelessWidget {
         children: [
           SlidableAction(
             icon: Icons.edit,
-            onPressed: null,
+            onPressed: (_) => goToEdit(context),
             label: 'Edit',
             backgroundColor: Theme.of(context).errorColor,
           ),
@@ -58,6 +59,14 @@ class ResourceListItem extends StatelessWidget {
         color: color,
         shape: BoxShape.circle,
       ),
+    );
+  }
+
+  void goToEdit(BuildContext context) {
+    Navigator.pushNamed(
+      context,
+      ResourcesFormPage.routeName,
+      arguments: ResourceFormPageArgs(resource: resource),
     );
   }
 }

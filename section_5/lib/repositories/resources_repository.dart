@@ -7,7 +7,7 @@ abstract class ResourcesRepository {
 
   Future<Resource> createResource(Resource resource);
 
-  Future<Resource> updateResource(Resource resource);
+  Future<Resource> updateResource(int id, Resource resource);
 
   Future<void> deleteResource(String id);
 }

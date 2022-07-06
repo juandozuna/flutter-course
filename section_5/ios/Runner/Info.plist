@@ -45,5 +45,11 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Se utiliza la imagen para cargar cedular en la aplicacion</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Camera access</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Mic access</string>
 </dict>
 </plist>

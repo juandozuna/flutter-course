@@ -8,7 +8,7 @@ import 'package:section_5/widgets/custom_app_bar.dart';
 import 'package:section_5/widgets/app_drawer.dart';
 
 class NavigationPage extends StatefulWidget {
-  static const String routeName = '/';
+  static const String routeName = '/navigator';
 
   const NavigationPage({Key? key}) : super(key: key);
 

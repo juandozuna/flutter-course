@@ -8,10 +8,13 @@ import 'package:section_5/data/services/resource_service.dart';
 import 'package:section_5/data/services/user_service.dart';
 import 'package:section_5/main.dart';
 import 'package:section_5/networking.dart';
+import 'package:section_5/packges/user_preferences_package.dart';
+import 'package:section_5/providers/init_provider.dart';
 import 'package:section_5/providers/resources_provider.dart';
 import 'package:section_5/providers/users_provider.dart';
 import 'package:section_5/repositories/resources_repository.dart';
 import 'package:section_5/repositories/user_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final _injector = GetIt.instance;
 
@@ -38,6 +41,8 @@ void _init() {
 
 void _registerInstances() {
   _registerNavKeys();
+  _registerLibraries();
+  _registerPackages();
   _registerNetworkClient();
   _registerServices();
   _registerRepositories();
@@ -55,7 +60,10 @@ void _registerRepositories() {
   );
 
   _injector.registerSingleton<UserRepository>(
-    UserDataRepository(get<UserService>()),
+    UserDataRepository(
+      get<UserService>(),
+      get<UserPreferencesPackage>(),
+    ),
   );
 }
 
@@ -64,16 +72,39 @@ void _registerNavKeys() {
 }
 
 void _registerProviders() {
+  _injector.registerSingleton<InitProvider>(
+    InitProvider(
+      get<UserRepository>(),
+      get<AppNavigatorKey>().mainKey,
+    ),
+  );
+
   _injector.registerSingleton(
     ResourcesProvider(get<ResourcesRepository>()),
   );
 
   _injector.registerSingleton(
-    UserProvider(get<UserRepository>()),
+    UserProvider(
+      get<UserRepository>(),
+      get<AppNavigatorKey>().mainKey,
+    ),
   );
 }
 
-void _registerNetworkClient() =>
-    _injector.registerSingleton<Dio>(createClient());
+void _registerLibraries() {
+  _injector.registerSingleton<Future<SharedPreferences>>(
+    SharedPreferences.getInstance(),
+  );
+}
+
+void _registerPackages() {
+  _injector.registerSingleton<UserPreferencesPackage>(
+    UserPreferencesPackageImpl(get<Future<SharedPreferences>>()),
+  );
+}
+
+void _registerNetworkClient() => _injector.registerSingleton<Dio>(
+      createClient(get<UserPreferencesPackage>()),
+    );
 
 T get<T extends Object>() => _injector<T>();

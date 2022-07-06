@@ -32,8 +32,8 @@ class ResourcesDataRepository implements ResourcesRepository {
   }
 
   @override
-  Future<Resource> updateResource(Resource resource) {
-    // TODO: implement updateResource
-    throw UnimplementedError();
+  Future<Resource> updateResource(int id, Resource resource) async {
+    final data = await _resourceService.updateResource(id, resource);
+    return resource;
   }
 }
