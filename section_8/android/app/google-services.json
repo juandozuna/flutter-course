@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "990726513558",
+    "project_id": "flutter-course-chat-3fbb7",
+    "storage_bucket": "flutter-course-chat-3fbb7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990726513558:android:83b4e29d5f40bb9bdc33b7",
+        "android_client_info": {
+          "package_name": "com.example.section_8"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "990726513558-61rnd3rc06s96rfnrtosnmrcpuj83mh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4kdax2TQpl9Pm5NLZtxkG4jbbfzCQ7mY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "990726513558-61rnd3rc06s96rfnrtosnmrcpuj83mh1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
