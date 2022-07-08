@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:section_8/domain/models/chat_message_model.dart';
 import 'package:section_8/presentation/constants/theme.dart';
 
 class ChatBubble extends StatelessWidget {
   final bool isMe;
-  final String text;
+  final ChatMessageModel message;
 
   const ChatBubble({
     Key? key,
     required this.isMe,
-    required this.text,
+    required this.message,
   }) : super(key: key);
 
   @override
@@ -35,7 +36,7 @@ class ChatBubble extends StatelessWidget {
           color: !isMe ? Theme.of(context).primaryColor : Colors.grey[300],
         ),
         child: Text(
-          this.text,
+          '${message.message}:  ${message.location?.toString() ?? ''}',
           textAlign: !isMe ? TextAlign.left : TextAlign.right,
         ),
       ),

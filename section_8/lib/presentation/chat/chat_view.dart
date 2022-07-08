@@ -24,7 +24,7 @@ class ChatView extends StatelessWidget {
                   if (snapshot.hasData) {
                     final isMe = snapshot.data!;
                     return ChatBubble(
-                      text: message.message,
+                      message: message,
                       isMe: isMe,
                     );
                   } else {

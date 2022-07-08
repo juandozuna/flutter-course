@@ -11,6 +11,9 @@ ChatMessageModel _$ChatMessageModelFromJson(Map<String, dynamic> json) =>
       message: json['message'] as String,
       sender: json['sender'] as String,
       timestamp: DateTime.parse(json['timestamp'] as String),
+      location: json['location'] == null
+          ? null
+          : DeviceLocation.fromJson(json['location'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ChatMessageModelToJson(ChatMessageModel instance) =>
@@ -18,4 +21,5 @@ Map<String, dynamic> _$ChatMessageModelToJson(ChatMessageModel instance) =>
       'message': instance.message,
       'sender': instance.sender,
       'timestamp': instance.timestamp.toIso8601String(),
+      'location': instance.location,
     };

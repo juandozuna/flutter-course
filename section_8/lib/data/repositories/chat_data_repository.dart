@@ -6,10 +6,12 @@ import 'package:rxdart/subjects.dart';
 import 'package:section_8/domain/models/chat_message_model.dart';
 import 'package:section_8/domain/repositories/auth_repository.dart';
 import 'package:section_8/domain/repositories/chat_repository.dart';
+import 'package:section_8/domain/service/location_service.dart';
 
 class ChatDataRepository implements ChatRepository {
   final AuthRepository _authRepository;
   final FirebaseFirestore _firestore;
+  final LocationService _locationService;
 
   late StreamSubscription<Object>? _messageSubscription;
   BehaviorSubject<List<ChatMessageModel>> _messagesSubject =
@@ -26,7 +28,11 @@ class ChatDataRepository implements ChatRepository {
             toFirestore: (model, _) => model.toJson(),
           );
 
-  ChatDataRepository(this._authRepository, this._firestore);
+  ChatDataRepository(
+    this._authRepository,
+    this._firestore,
+    this._locationService,
+  );
 
   @override
   Future<void> listenForMessages() async {
@@ -42,10 +48,12 @@ class ChatDataRepository implements ChatRepository {
   @override
   Future<void> sendMessage(String message) async {
     final user = (await _authRepository.getUser())!;
+    final location = await _locationService.getLocation();
     final model = ChatMessageModel(
       message: message,
       sender: user.email!,
       timestamp: DateTime.now(),
+      location: location,
     );
     await _chatRef.add(model);
   }

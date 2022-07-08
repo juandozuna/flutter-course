@@ -78,6 +78,7 @@ void _registerRepositories() {
     ChatDataRepository(
       get<AuthRepository>(),
       get<FirebaseFirestore>(),
+      get<LocationService>(),
     ),
   );
 
