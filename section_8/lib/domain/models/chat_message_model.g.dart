@@ -16,10 +16,19 @@ ChatMessageModel _$ChatMessageModelFromJson(Map<String, dynamic> json) =>
           : DeviceLocation.fromJson(json['location'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$ChatMessageModelToJson(ChatMessageModel instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'sender': instance.sender,
-      'timestamp': instance.timestamp.toIso8601String(),
-      'location': instance.location,
-    };
+Map<String, dynamic> _$ChatMessageModelToJson(ChatMessageModel instance) {
+  final val = <String, dynamic>{
+    'message': instance.message,
+    'sender': instance.sender,
+    'timestamp': instance.timestamp.toIso8601String(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('location', instance.location?.toJson());
+  return val;
+}

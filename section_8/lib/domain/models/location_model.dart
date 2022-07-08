@@ -7,7 +7,38 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'location_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
+class GeocodedLocation extends Equatable {
+  final String displayName;
+  final String neighbourhood;
+  final String country;
+  final String city;
+
+  GeocodedLocation({
+    required this.displayName,
+    required this.neighbourhood,
+    required this.country,
+    required this.city,
+  });
+
+  factory GeocodedLocation.fromJson(Map<String, dynamic> json) =>
+      _$GeocodedLocationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GeocodedLocationToJson(this);
+
+  @override
+  List<Object> get props => [
+        displayName,
+        neighbourhood,
+        country,
+        city,
+      ];
+
+  @override
+  bool get stringify => true;
+}
+
+@JsonSerializable(includeIfNull: false)
 class DeviceLocation extends Equatable {
   final double latitude;
   final double longitude;

@@ -4,7 +4,7 @@ import 'package:section_8/domain/models/location_model.dart';
 
 part 'chat_message_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class ChatMessageModel extends Equatable {
   final String message;
   final String sender;
