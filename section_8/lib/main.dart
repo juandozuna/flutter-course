@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 import 'package:section_8/injector.dart';
 import 'package:section_8/presentation/app_init/app_init.dart';
 
@@ -12,7 +13,7 @@ Future<void> main() async {
 }
 
 class Main extends StatelessWidget {
-  final List<Provider<Object>> providers;
+  final List<SingleChildWidget> providers;
 
   const Main({
     Key? key,
