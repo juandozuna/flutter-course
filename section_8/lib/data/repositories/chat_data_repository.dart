@@ -6,12 +6,14 @@ import 'package:rxdart/subjects.dart';
 import 'package:section_8/domain/models/chat_message_model.dart';
 import 'package:section_8/domain/repositories/auth_repository.dart';
 import 'package:section_8/domain/repositories/chat_repository.dart';
+import 'package:section_8/domain/service/geocoding_service.dart';
 import 'package:section_8/domain/service/location_service.dart';
 
 class ChatDataRepository implements ChatRepository {
   final AuthRepository _authRepository;
   final FirebaseFirestore _firestore;
   final LocationService _locationService;
+  final GeocodingService _geocodingService;
 
   late StreamSubscription<Object>? _messageSubscription;
   BehaviorSubject<List<ChatMessageModel>> _messagesSubject =
@@ -32,6 +34,7 @@ class ChatDataRepository implements ChatRepository {
     this._authRepository,
     this._firestore,
     this._locationService,
+    this._geocodingService,
   );
 
   @override
@@ -49,11 +52,13 @@ class ChatDataRepository implements ChatRepository {
   Future<void> sendMessage(String message) async {
     final user = (await _authRepository.getUser())!;
     final location = await _locationService.getLocation();
+    final geocodedLocation = await _geocodingService.reverseLookup(location);
     final model = ChatMessageModel(
       message: message,
       sender: user.email!,
       timestamp: DateTime.now(),
       location: location,
+      geocoded: geocodedLocation,
     );
     await _chatRef.add(model);
   }

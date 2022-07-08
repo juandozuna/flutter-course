@@ -21,37 +21,44 @@ class ChatBubble extends StatelessWidget {
       bottomRight: Radius.circular(AppValues.roundBorderRadius),
     );
 
-    final bubbleWidth = MediaQuery.of(context).size.width * 0.3;
+    final bubbleWidth = MediaQuery.of(context).size.width * 0.6;
 
     final bubble = Expanded(
       child: Container(
-        padding: EdgeInsets.all(AppValues.horizontalMargin),
-        width: bubbleWidth,
         margin: EdgeInsets.symmetric(
           vertical: AppValues.verticalMargin,
           horizontal: AppValues.horizontalMargin,
         ),
-        decoration: BoxDecoration(
-          borderRadius: borderRadius,
-          color: !isMe ? Theme.of(context).primaryColor : Colors.grey[300],
-        ),
-        child: Text(
-          '${message.message}:  ${message.location?.toString() ?? ''}',
-          textAlign: !isMe ? TextAlign.left : TextAlign.right,
+        child: Column(
+          crossAxisAlignment:
+              isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: EdgeInsets.all(AppValues.horizontalMargin),
+              width: bubbleWidth,
+              decoration: BoxDecoration(
+                borderRadius: borderRadius,
+                color:
+                    !isMe ? Theme.of(context).primaryColor : Colors.grey[300],
+              ),
+              child: Text(
+                '${message.message}',
+                textAlign: !isMe ? TextAlign.left : TextAlign.right,
+              ),
+            ),
+            if (message.location != null)
+              Text(
+                '(${message.location!.latitude}, ${message.location!.longitude})',
+              ),
+            if (message.geocoded != null)
+              Text(
+                '${message.geocoded?.neighbourhood ?? ''}',
+              ),
+          ],
         ),
       ),
     );
 
-    final sizedBox = SizedBox(
-      width: bubbleWidth,
-    );
-
-    return Row(
-      children: [
-        if (isMe) sizedBox,
-        bubble,
-        if (!isMe) sizedBox,
-      ],
-    );
+    return bubble;
   }
 }

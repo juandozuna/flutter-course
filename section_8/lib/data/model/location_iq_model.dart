@@ -6,7 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'location_iq_model.g.dart';
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
 class LocationIqResponse {
   LocationIqResponse({
     this.placeId,
@@ -36,7 +36,7 @@ class LocationIqResponse {
   Map<String, dynamic> toJson() => _$LocationIqResponseToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
 class _Address {
   _Address({
     this.supermarket,

@@ -6,10 +6,12 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:section_8/data/repositories/auth_data_repository.dart';
 import 'package:section_8/data/repositories/device_data_repository.dart';
+import 'package:section_8/data/services/geocoding_data_service.dart';
 import 'package:section_8/data/services/location_data_service.dart';
 import 'package:section_8/domain/repositories/auth_repository.dart';
 import 'package:section_8/domain/repositories/chat_repository.dart';
 import 'package:section_8/domain/repositories/device_repository.dart';
+import 'package:section_8/domain/service/geocoding_service.dart';
 import 'package:section_8/domain/service/location_service.dart';
 import 'package:section_8/firebase_options.dart';
 import 'package:section_8/presentation/providers/auth_provider.dart';
@@ -67,6 +69,7 @@ void _registerPackages() {
 
 void _registerServices() {
   _injector.registerSingleton<LocationService>(LocationDataService());
+  _injector.registerSingleton<GeocodingService>(GeocodingDataService());
 }
 
 void _registerRepositories() {
@@ -79,6 +82,7 @@ void _registerRepositories() {
       get<AuthRepository>(),
       get<FirebaseFirestore>(),
       get<LocationService>(),
+      get<GeocodingService>(),
     ),
   );
 

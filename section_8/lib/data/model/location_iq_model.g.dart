@@ -37,7 +37,7 @@ Map<String, dynamic> _$LocationIqResponseToJson(LocationIqResponse instance) {
   writeNotNull('lat', instance.lat);
   writeNotNull('lon', instance.lon);
   writeNotNull('displayName', instance.displayName);
-  val['address'] = instance.address;
+  val['address'] = instance.address.toJson();
   writeNotNull('boundingbox', instance.boundingbox);
   return val;
 }
