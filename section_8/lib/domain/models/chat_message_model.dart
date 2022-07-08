@@ -11,6 +11,7 @@ class ChatMessageModel extends Equatable {
   final DateTime timestamp;
   final DeviceLocation? location;
   final GeocodedLocation? geocoded;
+  final String? fileLocation;
 
   ChatMessageModel({
     required this.message,
@@ -18,12 +19,31 @@ class ChatMessageModel extends Equatable {
     required this.timestamp,
     required this.location,
     required this.geocoded,
+    required this.fileLocation,
   });
 
   factory ChatMessageModel.fromJson(Map<String, dynamic> json) =>
       _$ChatMessageModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ChatMessageModelToJson(this);
+
+  ChatMessageModel copyWith({
+    String? message,
+    String? sender,
+    DateTime? timestamp,
+    DeviceLocation? location,
+    GeocodedLocation? geocoded,
+    String? fileLocation,
+  }) {
+    return ChatMessageModel(
+      message: message ?? this.message,
+      sender: sender ?? this.sender,
+      timestamp: timestamp ?? this.timestamp,
+      location: location ?? this.location,
+      geocoded: geocoded ?? this.geocoded,
+      fileLocation: fileLocation ?? this.fileLocation,
+    );
+  }
 
   @override
   List<Object?> get props => [
@@ -32,6 +52,7 @@ class ChatMessageModel extends Equatable {
         timestamp,
         location,
         geocoded,
+        fileLocation,
       ];
 
   @override

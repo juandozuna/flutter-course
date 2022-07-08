@@ -1,4 +1,6 @@
+import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:section_8/domain/enums/chat_image_source.dart';
 import 'package:section_8/injector.dart';
 import 'package:section_8/presentation/providers/chat_provider.dart';
 
@@ -11,6 +13,7 @@ class ChatInputField extends StatefulWidget {
 
 class _ChatInputFieldState extends State<ChatInputField> {
   final _textController = TextEditingController();
+  final _chatProvider = get<ChatProvider>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
         children: [
           Expanded(child: _buildTextField()),
           _sendButton(),
+          _sendImageButton(context),
         ],
       ),
     );
@@ -49,11 +53,46 @@ class _ChatInputFieldState extends State<ChatInputField> {
     );
   }
 
+  Widget _sendImageButton(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.attach_file),
+      onPressed: () => sendImage(context),
+    );
+  }
+
+  void sendImage(BuildContext context) async {
+    ChatImageSource? chosen;
+    await showAdaptiveActionSheet(
+      actions: [
+        BottomSheetAction(
+            title: Text('Camera'),
+            onPressed: () {
+              chosen = ChatImageSource.camera;
+              Navigator.pop(context);
+            }),
+        BottomSheetAction(
+            title: Text('Gallery'),
+            onPressed: () {
+              chosen = ChatImageSource.gallery;
+              Navigator.pop(context);
+            }),
+      ],
+      cancelAction: CancelAction(title: Text('Cancel')),
+      context: context,
+    );
+
+    if (chosen == null) {
+      return;
+    }
+
+    final message = _textController.text;
+    _chatProvider.sendPictureMessage(message, chosen!);
+  }
+
   void sendMessage() {
     final message = _textController.text;
 
-    final chatProvider = get<ChatProvider>();
-    chatProvider.sendMessage(message);
+    _chatProvider.sendMessage(message);
 
     setState(() => _textController.clear());
   }

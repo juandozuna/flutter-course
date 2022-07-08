@@ -17,6 +17,7 @@ ChatMessageModel _$ChatMessageModelFromJson(Map<String, dynamic> json) =>
       geocoded: json['geocoded'] == null
           ? null
           : GeocodedLocation.fromJson(json['geocoded'] as Map<String, dynamic>),
+      fileLocation: json['fileLocation'] as String?,
     );
 
 Map<String, dynamic> _$ChatMessageModelToJson(ChatMessageModel instance) {
@@ -34,5 +35,6 @@ Map<String, dynamic> _$ChatMessageModelToJson(ChatMessageModel instance) {
 
   writeNotNull('location', instance.location?.toJson());
   writeNotNull('geocoded', instance.geocoded?.toJson());
+  writeNotNull('fileLocation', instance.fileLocation);
   return val;
 }

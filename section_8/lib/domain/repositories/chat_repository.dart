@@ -9,4 +9,6 @@ abstract class ChatRepository {
   Future<void> listenForMessages();
 
   Future<void> stopListeningToMessages();
+
+  Future<void> sendPictureMessage(String message, String filePath);
 }
