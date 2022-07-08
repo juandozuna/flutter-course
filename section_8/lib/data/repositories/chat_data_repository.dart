@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/src/streams/value_stream.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:section_8/domain/models/chat_message_model.dart';
 import 'package:section_8/domain/repositories/auth_repository.dart';
 import 'package:section_8/domain/repositories/chat_repository.dart';
-import 'package:section_8/models/chat_message_model.dart';
 
 class ChatDataRepository implements ChatRepository {
   final AuthRepository _authRepository;

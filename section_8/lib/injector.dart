@@ -5,8 +5,12 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:section_8/data/repositories/auth_data_repository.dart';
+import 'package:section_8/data/repositories/device_data_repository.dart';
+import 'package:section_8/data/services/location_data_service.dart';
 import 'package:section_8/domain/repositories/auth_repository.dart';
 import 'package:section_8/domain/repositories/chat_repository.dart';
+import 'package:section_8/domain/repositories/device_repository.dart';
+import 'package:section_8/domain/service/location_service.dart';
 import 'package:section_8/firebase_options.dart';
 import 'package:section_8/presentation/providers/auth_provider.dart';
 import 'package:section_8/presentation/providers/chat_provider.dart';
@@ -35,6 +39,8 @@ List<SingleChildWidget> _getProviders() {
 Future<void> _registerAll() async {
   await _initFirebase();
 
+  _registerPackages();
+  _registerServices();
   _registerRepositories();
 
   /// Run this function last to ensure dependencies are initialized correcttly
@@ -55,6 +61,14 @@ Future<void> _initFirebase() async {
   );
 }
 
+void _registerPackages() {
+  //TODO: Register packages here
+}
+
+void _registerServices() {
+  _injector.registerSingleton<LocationService>(LocationDataService());
+}
+
 void _registerRepositories() {
   _injector.registerSingleton<AuthRepository>(
     AuthDataRepository(get<FirebaseAuth>()),
@@ -66,12 +80,17 @@ void _registerRepositories() {
       get<FirebaseFirestore>(),
     ),
   );
+
+  _injector.registerSingleton<DeviceRepository>(
+    DeviceDataRepository(get<LocationService>()),
+  );
 }
 
 void _registerProviders() {
   _injector.registerSingleton<InitProvider>(
     InitProvider(
       get<AuthRepository>(),
+      get<DeviceRepository>(),
     ),
   );
 

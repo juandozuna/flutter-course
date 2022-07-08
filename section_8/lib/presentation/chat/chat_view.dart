@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:section_8/domain/models/chat_message_model.dart';
 import 'package:section_8/injector.dart';
-import 'package:section_8/models/chat_message_model.dart';
 import 'package:section_8/presentation/chat/chat_bubble.dart';
 import 'package:section_8/presentation/providers/chat_provider.dart';
 

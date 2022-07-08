@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:section_8/injector.dart';
-import 'package:section_8/presentation/constants/theme.dart';
 import 'package:section_8/presentation/providers/chat_provider.dart';
 
 class ChatInputField extends StatefulWidget {
@@ -15,7 +14,6 @@ class _ChatInputFieldState extends State<ChatInputField> {
 
   @override
   Widget build(BuildContext context) {
-    final radius = Radius.circular(AppValues.roundBorderRadius);
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
