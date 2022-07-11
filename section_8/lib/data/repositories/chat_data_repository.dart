@@ -67,7 +67,10 @@ class ChatDataRepository implements ChatRepository {
   @override
   Future<void> sendPictureMessage(String? message, String filePath) async {
     final m = await _buildMessage(message ?? '');
-    final completeModel = m.copyWith(fileLocation: filePath);
+    final completeModel = m.copyWith(
+      fileLocation: filePath,
+      type: ChatMessageType.picture,
+    );
     await _chatRef.add(completeModel);
   }
 
@@ -80,6 +83,7 @@ class ChatDataRepository implements ChatRepository {
       sender: user.email!,
       timestamp: DateTime.now(),
       location: location,
+      type: ChatMessageType.text,
       geocoded: geocodedLocation,
       fileLocation: null,
     );

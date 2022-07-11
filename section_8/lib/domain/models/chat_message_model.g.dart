@@ -11,6 +11,7 @@ ChatMessageModel _$ChatMessageModelFromJson(Map<String, dynamic> json) =>
       message: json['message'] as String,
       sender: json['sender'] as String,
       timestamp: DateTime.parse(json['timestamp'] as String),
+      type: $enumDecode(_$ChatMessageTypeEnumMap, json['type']),
       location: json['location'] == null
           ? null
           : DeviceLocation.fromJson(json['location'] as Map<String, dynamic>),
@@ -25,6 +26,7 @@ Map<String, dynamic> _$ChatMessageModelToJson(ChatMessageModel instance) {
     'message': instance.message,
     'sender': instance.sender,
     'timestamp': instance.timestamp.toIso8601String(),
+    'type': _$ChatMessageTypeEnumMap[instance.type],
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -38,3 +40,8 @@ Map<String, dynamic> _$ChatMessageModelToJson(ChatMessageModel instance) {
   writeNotNull('fileLocation', instance.fileLocation);
   return val;
 }
+
+const _$ChatMessageTypeEnumMap = {
+  ChatMessageType.text: 'Text',
+  ChatMessageType.picture: 'Picture',
+};

@@ -4,11 +4,19 @@ import 'package:section_8/domain/models/location_model.dart';
 
 part 'chat_message_model.g.dart';
 
+enum ChatMessageType {
+  @JsonValue('Text')
+  text,
+  @JsonValue('Picture')
+  picture,
+}
+
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
 class ChatMessageModel extends Equatable {
   final String message;
   final String sender;
   final DateTime timestamp;
+  final ChatMessageType type;
   final DeviceLocation? location;
   final GeocodedLocation? geocoded;
   final String? fileLocation;
@@ -17,6 +25,7 @@ class ChatMessageModel extends Equatable {
     required this.message,
     required this.sender,
     required this.timestamp,
+    required this.type,
     required this.location,
     required this.geocoded,
     required this.fileLocation,
@@ -31,6 +40,7 @@ class ChatMessageModel extends Equatable {
     String? message,
     String? sender,
     DateTime? timestamp,
+    ChatMessageType? type,
     DeviceLocation? location,
     GeocodedLocation? geocoded,
     String? fileLocation,
@@ -39,6 +49,7 @@ class ChatMessageModel extends Equatable {
       message: message ?? this.message,
       sender: sender ?? this.sender,
       timestamp: timestamp ?? this.timestamp,
+      type: type ?? this.type,
       location: location ?? this.location,
       geocoded: geocoded ?? this.geocoded,
       fileLocation: fileLocation ?? this.fileLocation,
@@ -50,6 +61,7 @@ class ChatMessageModel extends Equatable {
         message,
         sender,
         timestamp,
+        type,
         location,
         geocoded,
         fileLocation,

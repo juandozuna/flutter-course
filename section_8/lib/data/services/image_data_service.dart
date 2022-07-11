@@ -26,7 +26,7 @@ class ImageDataService implements ImageService {
   }
 
   Future<File?> _pickImage(ImageSource source) async {
-    final image = await _picker.pickImage(source: ImageSource.gallery);
+    final image = await _picker.pickImage(source: source);
     if (image == null) {
       return null;
     }

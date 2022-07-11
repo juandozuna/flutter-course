@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:section_8/domain/enums/chat_image_source.dart';
 import 'package:section_8/domain/models/chat_message_model.dart';
@@ -40,6 +42,7 @@ class ChatProvider extends BaseNotifierProvider {
   }
 
   void sendPictureMessage(String message, ChatImageSource imageSource) async {
+    startLoading();
     final file = await _imageService.pickPicture(imageSource);
     if (file == null) {
       return;
@@ -47,6 +50,11 @@ class ChatProvider extends BaseNotifierProvider {
 
     final url = await _fileRepository.saveFile(file);
 
-    _chatRepository.sendPictureMessage(message, url);
+    await _chatRepository.sendPictureMessage(message, url);
+    stopLoading();
+  }
+
+  Future<Uint8List?> getImage(String path) async {
+    return _fileRepository.getFile(path);
   }
 }
