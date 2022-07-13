@@ -8,7 +8,6 @@ class AuthDataRepository implements AuthRepository {
 
   @override
   Future<User?> getUser() async {
-    final user = _firebaseAuth.currentUser;
     return _firebaseAuth.currentUser;
   }
 
