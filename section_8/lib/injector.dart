@@ -21,6 +21,7 @@ import 'package:section_8/domain/service/geocoding_service.dart';
 import 'package:section_8/domain/service/image_service.dart';
 import 'package:section_8/domain/service/location_service.dart';
 import 'package:section_8/firebase_options.dart';
+import 'package:section_8/presentation/constants/routes.dart';
 import 'package:section_8/presentation/providers/auth_provider.dart';
 import 'package:section_8/presentation/providers/chat_provider.dart';
 import 'package:section_8/presentation/providers/init_provider.dart';
@@ -115,6 +116,7 @@ void _registerProviders() {
     InitProvider(
       get<AuthRepository>(),
       get<DeviceRepository>(),
+      AppRoute.navKey,
     ),
   );
 
