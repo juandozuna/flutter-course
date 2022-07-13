@@ -37,6 +37,7 @@ class _LoginFormState extends State<LoginForm> {
             children: [
               if (val.hasError) ErrorContainer(error: val.error.toString()),
               AppTextField(
+                key: ValueKey('email-field'),
                 label: 'Email',
                 nextFocusNode: _passwordFocusNode,
                 keyboardType: TextInputType.emailAddress,
@@ -48,6 +49,7 @@ class _LoginFormState extends State<LoginForm> {
                 onSaved: (val) => email = val ?? '',
               ),
               AppTextField(
+                key: ValueKey('password-field'),
                 label: 'Password',
                 focusNode: _passwordFocusNode,
                 obscureText: true,
@@ -76,7 +78,7 @@ class _LoginFormState extends State<LoginForm> {
 
     form.save();
 
-    final authProvider = get<AuthProvider>();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     final isSuccess =
         await authProvider.signInWithEmailAndPassword(email, password);

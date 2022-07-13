@@ -4,6 +4,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:section_8/presentation/constants/theme.dart';
 
 class AppTextField extends StatelessWidget {
+  final Key? key;
   final String label;
   final String? initialValue;
   final TextEditingController? controller;
@@ -19,7 +20,7 @@ class AppTextField extends StatelessWidget {
   final bool obscureText;
 
   const AppTextField({
-    Key? key,
+    this.key,
     required this.label,
     this.onChanged,
     this.onSaved,
@@ -33,7 +34,7 @@ class AppTextField extends StatelessWidget {
     this.keyboardType,
     this.obscureText = false,
     this.onFieldSubmitted,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,7 @@ class AppTextField extends StatelessWidget {
         vertical: AppValues.verticalMargin,
       ),
       child: TextFormField(
+        key: key,
         decoration: InputDecoration(
           labelText: label,
           border: OutlineInputBorder(
