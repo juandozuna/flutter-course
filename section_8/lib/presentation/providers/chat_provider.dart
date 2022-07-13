@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:flutter/material.dart';
 import 'package:section_8/domain/enums/chat_image_source.dart';
 import 'package:section_8/domain/models/chat_message_model.dart';
 import 'package:section_8/domain/repositories/auth_repository.dart';
