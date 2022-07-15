@@ -25,6 +25,7 @@ import 'package:section_8/presentation/constants/routes.dart';
 import 'package:section_8/presentation/providers/auth_provider.dart';
 import 'package:section_8/presentation/providers/chat_provider.dart';
 import 'package:section_8/presentation/providers/init_provider.dart';
+import 'package:section_8/presentation/providers/map_provider.dart';
 
 import 'data/repositories/chat_data_repository.dart';
 
@@ -41,6 +42,7 @@ Future<List<SingleChildWidget>> initInjector() async {
 List<SingleChildWidget> _getProviders() {
   return [
     Provider.value(value: get<InitProvider>()),
+    Provider.value(value: get<MapProvider>()),
     ChangeNotifierProvider.value(value: get<AuthProvider>()),
     ChangeNotifierProvider.value(value: get<ChatProvider>()),
   ];
@@ -132,6 +134,12 @@ void _registerProviders() {
       get<ChatRepository>(),
       get<ImageService>(),
       get<FileRepository>(),
+    ),
+  );
+
+  _injector.registerSingleton<MapProvider>(
+    MapProvider(
+      get<DeviceRepository>(),
     ),
   );
 }
