@@ -1,5 +1,6 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:section_8/domain/models/chat_message_model.dart';
+import 'package:section_8/domain/models/location_model.dart';
 
 abstract class ChatRepository {
   ValueStream<List<ChatMessageModel>> get messages;
@@ -11,4 +12,6 @@ abstract class ChatRepository {
   Future<void> stopListeningToMessages();
 
   Future<void> sendPictureMessage(String message, String filePath);
+
+  Future<void> sendLocation(String imagePath, DeviceLocation location);
 }

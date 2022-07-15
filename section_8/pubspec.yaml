@@ -46,6 +46,7 @@ dependencies:
   image_picker: ^0.8.5+3
   firebase_storage: ^10.3.1
   google_maps_flutter: ^2.1.8
+  screenshot: ^1.2.3
 
 dev_dependencies:
   integration_test:

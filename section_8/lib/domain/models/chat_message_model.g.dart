@@ -44,4 +44,5 @@ Map<String, dynamic> _$ChatMessageModelToJson(ChatMessageModel instance) {
 const _$ChatMessageTypeEnumMap = {
   ChatMessageType.text: 'Text',
   ChatMessageType.picture: 'Picture',
+  ChatMessageType.location: 'Location',
 };

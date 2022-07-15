@@ -28,4 +28,11 @@ class FileDataRepository implements FileRepository {
     final ref = _storage.ref(path);
     return ref.getData();
   }
+
+  @override
+  Future<String> saveFileFromBytes(Uint8List bytes) async {
+    final randString = DateTime.now().millisecondsSinceEpoch.toString();
+    final result = await _chatRef.child(randString).putData(bytes);
+    return result.metadata?.fullPath ?? '';
+  }
 }

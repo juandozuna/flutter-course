@@ -140,6 +140,7 @@ void _registerProviders() {
   _injector.registerSingleton<MapProvider>(
     MapProvider(
       get<DeviceRepository>(),
+      get<FileRepository>(),
     ),
   );
 }

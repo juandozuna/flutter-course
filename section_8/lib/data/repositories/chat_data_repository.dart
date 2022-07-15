@@ -5,6 +5,7 @@ import 'package:rxdart/src/streams/value_stream.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:section_8/domain/enums/chat_image_source.dart';
 import 'package:section_8/domain/models/chat_message_model.dart';
+import 'package:section_8/domain/models/location_model.dart';
 import 'package:section_8/domain/repositories/auth_repository.dart';
 import 'package:section_8/domain/repositories/chat_repository.dart';
 import 'package:section_8/domain/service/geocoding_service.dart';
@@ -74,10 +75,17 @@ class ChatDataRepository implements ChatRepository {
     await _chatRef.add(completeModel);
   }
 
-  Future<ChatMessageModel> _buildMessage(String message) async {
+  Future<ChatMessageModel> _buildMessage(String message,
+      [bool getLocation = true]) async {
     final user = (await _authRepository.getUser())!;
-    final location = await _locationService.getLocation();
-    final geocodedLocation = await _geocodingService.reverseLookup(location);
+    late final DeviceLocation? location;
+    late final GeocodedLocation? geocodedLocation;
+
+    if (getLocation) {
+      location = await _locationService.getLocation();
+      geocodedLocation = await _geocodingService.reverseLookup(location);
+    }
+
     final model = ChatMessageModel(
       message: message,
       sender: user.email!,
@@ -88,5 +96,21 @@ class ChatDataRepository implements ChatRepository {
       fileLocation: null,
     );
     return model;
+  }
+
+  @override
+  Future<void> sendLocation(String imagePath, DeviceLocation location) async {
+    final message = await _buildMessage('', false);
+
+    final geocodedLocation = await _geocodingService.reverseLookup(location);
+
+    final newModel = message.copyWith(
+      location: location,
+      geocoded: geocodedLocation,
+      fileLocation: imagePath,
+      type: ChatMessageType.location,
+    );
+
+    await _chatRef.add(newModel);
   }
 }
