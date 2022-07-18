@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:section_8/presentation/constants/theme.dart';
 import 'package:section_8/util.dart';
 
 class PrimaryButton extends StatelessWidget {
-  final String label;
+  final String labelKey;
   final VoidCallback? onPressed;
   final Color? color;
 
   const PrimaryButton({
     Key? key,
-    required this.label,
+    required this.labelKey,
     this.onPressed,
     this.color,
   }) : super(key: key);
@@ -29,7 +30,7 @@ class PrimaryButton extends StatelessWidget {
         ),
         child: SizedBox(
           width: double.infinity,
-          child: Text(label),
+          child: Text(translate(labelKey)),
         ),
       ),
     );

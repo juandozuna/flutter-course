@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
 import 'package:section_8/injector.dart';
@@ -38,7 +39,7 @@ class _LoginFormState extends State<LoginForm> {
               if (val.hasError) ErrorContainer(error: val.error.toString()),
               AppTextField(
                 key: ValueKey('email-field'),
-                label: 'Email',
+                labelKey: 'email',
                 nextFocusNode: _passwordFocusNode,
                 keyboardType: TextInputType.emailAddress,
                 validators: [
@@ -50,7 +51,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
               AppTextField(
                 key: ValueKey('password-field'),
-                label: 'Password',
+                labelKey: 'password',
                 focusNode: _passwordFocusNode,
                 obscureText: true,
                 validators: [
@@ -59,7 +60,7 @@ class _LoginFormState extends State<LoginForm> {
                 onSaved: (val) => password = val ?? '',
               ),
               SizedBox(height: 20),
-              PrimaryButton(label: 'Log In', onPressed: submitForm),
+              PrimaryButton(labelKey: 'logIn', onPressed: submitForm),
             ],
           ),
         ),

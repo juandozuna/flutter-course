@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:section_8/presentation/constants/theme.dart';
 
 class AppTextField extends StatelessWidget {
   final Key? key;
-  final String label;
+  final String labelKey;
   final String? initialValue;
   final TextEditingController? controller;
   final void Function(String)? onChanged;
@@ -21,7 +22,7 @@ class AppTextField extends StatelessWidget {
 
   const AppTextField({
     this.key,
-    required this.label,
+    required this.labelKey,
     this.onChanged,
     this.onSaved,
     this.initialValue,
@@ -47,7 +48,7 @@ class AppTextField extends StatelessWidget {
       child: TextFormField(
         key: key,
         decoration: InputDecoration(
-          labelText: label,
+          labelText: translate(labelKey),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(
               AppValues.inputBorderRadius,

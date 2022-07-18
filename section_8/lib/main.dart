@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:section_8/injector.dart';
@@ -7,9 +8,20 @@ import 'package:section_8/presentation/app_init/app_init.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  final delegate = await LocalizationDelegate.create(
+    fallbackLocale: 'es',
+    supportedLocales: ['es', 'en'],
+  );
+
   final providers = await initInjector();
 
-  runApp(Main(providers: providers));
+  runApp(
+    LocalizedApp(
+        delegate,
+        Main(
+          providers: providers,
+        )),
+  );
 }
 
 class Main extends StatelessWidget {
