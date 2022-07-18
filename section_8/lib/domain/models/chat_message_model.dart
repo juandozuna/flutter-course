@@ -9,6 +9,8 @@ enum ChatMessageType {
   text,
   @JsonValue('Picture')
   picture,
+  @JsonValue('Location')
+  location,
 }
 
 @JsonSerializable(includeIfNull: false, explicitToJson: true)

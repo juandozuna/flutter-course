@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:section_8/domain/enums/chat_image_source.dart';
 import 'package:section_8/injector.dart';
+import 'package:section_8/presentation/constants/routes.dart';
 import 'package:section_8/presentation/providers/chat_provider.dart';
 import 'package:section_8/presentation/widgets/centered_circular_loading.dart';
 
@@ -82,6 +83,12 @@ class _ChatInputFieldState extends State<ChatInputField> {
             onPressed: () {
               chosen = ChatImageSource.gallery;
               Navigator.pop(context);
+            }),
+        BottomSheetAction(
+            title: Text('Maps'),
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.of(context).pushNamed(AppRoute.map);
             }),
       ],
       cancelAction: CancelAction(title: Text('Cancel')),

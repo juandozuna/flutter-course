@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:section_8/domain/enums/chat_image_source.dart';
 import 'package:section_8/domain/models/chat_message_model.dart';
+import 'package:section_8/domain/models/location_model.dart';
 import 'package:section_8/domain/repositories/auth_repository.dart';
 import 'package:section_8/domain/repositories/chat_repository.dart';
 import 'package:section_8/domain/repositories/file_repository.dart';
@@ -50,6 +51,12 @@ class ChatProvider extends BaseNotifierProvider {
     final url = await _fileRepository.saveFile(file);
 
     await _chatRepository.sendPictureMessage(message, url);
+    stopLoading();
+  }
+
+  Future<void> sendLocation(String imagePath, DeviceLocation location) async {
+    startLoading();
+    await _chatRepository.sendLocation(imagePath, location);
     stopLoading();
   }
 
