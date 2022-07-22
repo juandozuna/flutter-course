@@ -3,7 +3,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:section_8/presentation/app_init/app_init_route_generator.dart';
 import 'package:section_8/presentation/constants/routes.dart';
 import 'package:section_8/presentation/constants/theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppInit extends StatelessWidget {
   const AppInit({Key? key}) : super(key: key);
@@ -14,7 +13,6 @@ class AppInit extends StatelessWidget {
       title: 'Section 8',
       theme: AppTheme.theme,
       localizationsDelegates: [
-        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

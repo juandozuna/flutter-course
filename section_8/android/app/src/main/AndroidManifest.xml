@@ -1,14 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.section_8">
+    package="com.xyz.chatcourseapp">
 
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:label="section_8">
-        <meta-data android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyAY-U9KlUiW-og0ggZv5uHPxTh7xvwYP9M"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAY-U9KlUiW-og0ggZv5uHPxTh7xvwYP9M" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.xyz.chatcourseapp.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
             android:hardwareAccelerated="true"
