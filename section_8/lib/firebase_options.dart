@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyB4kdax2TQpl9Pm5NLZtxkG4jbbfzCQ7mY',
-    appId: '1:990726513558:android:83b4e29d5f40bb9bdc33b7',
+    appId: '1:990726513558:android:740187eb7573bbccdc33b7',
     messagingSenderId: '990726513558',
     projectId: 'flutter-course-chat-3fbb7',
     storageBucket: 'flutter-course-chat-3fbb7.appspot.com',
@@ -63,12 +63,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyA9jQh_JSrIaGFuUs1EUQ9gzIloLbhO3Rw',
-    appId: '1:990726513558:ios:243bcafac8b0d78ddc33b7',
+    appId: '1:990726513558:ios:3ba593b1b7bea8bbdc33b7',
     messagingSenderId: '990726513558',
     projectId: 'flutter-course-chat-3fbb7',
     storageBucket: 'flutter-course-chat-3fbb7.appspot.com',
-    iosClientId: '990726513558-na1nkvqgmie95houss8fmfa4fkcboefr.apps.googleusercontent.com',
-    iosBundleId: 'com.example.section8',
+    iosClientId: '990726513558-p9lqmes77glgbrei0tpnrrdgn5vhj9i6.apps.googleusercontent.com',
+    iosBundleId: 'com.xyz.chatcourseapp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
