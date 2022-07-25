@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +12,7 @@ import 'package:provider/single_child_widget.dart';
 import 'package:section_8/data/repositories/auth_data_repository.dart';
 import 'package:section_8/data/repositories/device_data_repository.dart';
 import 'package:section_8/data/repositories/file_data_repository.dart';
+import 'package:section_8/data/repositories/notification_data_repository.dart';
 import 'package:section_8/data/services/geocoding_data_service.dart';
 import 'package:section_8/data/services/image_data_service.dart';
 import 'package:section_8/data/services/location_data_service.dart';
@@ -17,6 +20,7 @@ import 'package:section_8/domain/repositories/auth_repository.dart';
 import 'package:section_8/domain/repositories/chat_repository.dart';
 import 'package:section_8/domain/repositories/device_repository.dart';
 import 'package:section_8/domain/repositories/file_repository.dart';
+import 'package:section_8/domain/repositories/notification_repository.dart';
 import 'package:section_8/domain/service/geocoding_service.dart';
 import 'package:section_8/domain/service/image_service.dart';
 import 'package:section_8/domain/service/location_service.dart';
@@ -26,6 +30,7 @@ import 'package:section_8/presentation/providers/auth_provider.dart';
 import 'package:section_8/presentation/providers/chat_provider.dart';
 import 'package:section_8/presentation/providers/init_provider.dart';
 import 'package:section_8/presentation/providers/map_provider.dart';
+import 'package:section_8/presentation/providers/notification_provider.dart';
 
 import 'data/repositories/chat_data_repository.dart';
 
@@ -75,10 +80,16 @@ Future<void> _initFirebase() async {
   _injector.registerLazySingleton<FirebaseStorage>(
     () => FirebaseStorage.instance,
   );
+
+  _injector.registerLazySingleton<FirebaseMessaging>(
+    () => FirebaseMessaging.instance,
+  );
 }
 
 void _registerPackages() {
   _injector.registerLazySingleton<ImagePicker>(() => ImagePicker());
+
+  _injector.registerLazySingleton(() => FlutterLocalNotificationsPlugin());
 }
 
 void _registerServices() {
@@ -111,13 +122,23 @@ void _registerRepositories() {
   _injector.registerSingleton<DeviceRepository>(
     DeviceDataRepository(get<LocationService>()),
   );
+
+  _injector.registerSingleton<NotificationRepository>(
+    NotificationDataRepository(
+        get<FirebaseMessaging>(), get<FlutterLocalNotificationsPlugin>()),
+  );
 }
 
 void _registerProviders() {
+  _injector.registerSingleton<NotificationProvider>(
+    NotificationProvider(get<NotificationRepository>()),
+  );
+
   _injector.registerSingleton<InitProvider>(
     InitProvider(
       get<AuthRepository>(),
       get<DeviceRepository>(),
+      get<NotificationRepository>(),
       AppRoute.navKey,
     ),
   );

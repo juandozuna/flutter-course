@@ -9,24 +9,37 @@ import 'package:section_5/pages/resources/resources_form_page.dart';
 import 'package:section_5/pages/splash_screen_page.dart';
 import 'package:section_5/theme/theme.dart';
 
+import 'main.dart';
+
 void main() {
-  runApp(const MyApp());
+  final config = AppConfig(
+    appName: 'Section 5 DEV',
+    flavor: 'dev',
+  );
+  runApp(MyApp(
+    config: config,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final AppConfig config;
+
+  const MyApp({
+    Key? key,
+    required this.config,
+  }) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return initProvider(
-      AppConfig(appName: 'appName', flavor: 'flavor'),
+      config,
       (p0) => GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: MaterialApp(
-          title: 'Flutter Demo',
+          title: config.appName,
           theme: AppTheme.getTheme(),
           initialRoute: SplashScreenPage.routeName,
           routes: {
@@ -42,9 +55,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
-
-class AppNavigatorKey {
-  final mainKey = GlobalKey<NavigatorState>();
-  final homeKey = GlobalKey<NavigatorState>();
 }

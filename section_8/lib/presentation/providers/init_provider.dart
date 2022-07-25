@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:section_8/domain/repositories/auth_repository.dart';
 import 'package:section_8/domain/repositories/device_repository.dart';
+import 'package:section_8/domain/repositories/notification_repository.dart';
 import 'package:section_8/presentation/constants/routes.dart';
 
 class InitProvider {
   final AuthRepository _authRepository;
   final DeviceRepository _deviceRepository;
+  final NotificationRepository _notificationRepository;
   final GlobalKey<NavigatorState> _navKey;
 
   InitProvider(
     this._authRepository,
     this._deviceRepository,
+    this._notificationRepository,
     this._navKey,
   );
 
   Future<void> init() async {
     await _handleLocationPermissions();
     await _handleUserSession();
+    await _getNotificationToken();
   }
 
   Future<void> _handleLocationPermissions() async {
@@ -36,5 +40,10 @@ class InitProvider {
       //Navigate to login
       _navKey.currentState!.pushReplacementNamed(AppRoute.login);
     }
+  }
+
+  Future<void> _getNotificationToken() async {
+    final token = await _notificationRepository.getToken();
+    print('token: $token');
   }
 }

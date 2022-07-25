@@ -16,13 +16,18 @@ import 'package:section_5/repositories/resources_repository.dart';
 import 'package:section_5/repositories/user_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'app_config.dart';
+
 final _injector = GetIt.instance;
 
 bool _alreadyRegistered = false;
 
-MultiProvider initProvider(Widget Function(BuildContext) builder) {
+MultiProvider initProvider(
+  AppConfig config,
+  Widget Function(BuildContext) builder,
+) {
   if (!_alreadyRegistered) {
-    _init();
+    _init(config);
     _alreadyRegistered = true;
   }
 
@@ -35,7 +40,8 @@ MultiProvider initProvider(Widget Function(BuildContext) builder) {
   );
 }
 
-void _init() {
+void _init(AppConfig config) {
+  _injector.registerSingleton<AppConfig>(config);
   _registerInstances();
 }
 
