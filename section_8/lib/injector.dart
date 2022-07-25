@@ -131,7 +131,10 @@ void _registerRepositories() {
 
 void _registerProviders() {
   _injector.registerSingleton<NotificationProvider>(
-    NotificationProvider(get<NotificationRepository>()),
+    NotificationProvider(
+      get<NotificationRepository>(),
+      AppRoute.navKey,
+    ),
   );
 
   _injector.registerSingleton<InitProvider>(
