@@ -143,6 +143,7 @@ void _registerProviders() {
       get<DeviceRepository>(),
       get<NotificationRepository>(),
       AppRoute.navKey,
+      get<NotificationProvider>(),
     ),
   );
 

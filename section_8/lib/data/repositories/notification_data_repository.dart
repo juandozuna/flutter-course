@@ -1,14 +1,17 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:section_8/domain/models/notification_model.dart';
 import 'package:section_8/domain/repositories/notification_repository.dart';
 
 class NotificationDataRepository implements NotificationRepository {
   final FirebaseMessaging _messaging;
   final FlutterLocalNotificationsPlugin _localNotif;
 
-  final BehaviorSubject<String> _foregroundMessageSubject =
-      BehaviorSubject<String>();
+  final BehaviorSubject<NotificationModel> _foregroundMessageSubject =
+      BehaviorSubject<NotificationModel>();
   final BehaviorSubject<RemoteMessage> _backgroundMessageSubject =
       BehaviorSubject<RemoteMessage>();
 
@@ -17,7 +20,8 @@ class NotificationDataRepository implements NotificationRepository {
       _backgroundMessageSubject.stream;
 
   @override
-  Stream<String> get foregroundMessages => _foregroundMessageSubject.stream;
+  Stream<NotificationModel> get foregroundMessages =>
+      _foregroundMessageSubject.stream;
 
   NotificationDataRepository(this._messaging, this._localNotif);
 
@@ -40,14 +44,18 @@ class NotificationDataRepository implements NotificationRepository {
       ),
       onSelectNotification: (payload) async {
         print('notification payload: $payload');
-        _foregroundMessageSubject.add(payload ?? '');
+
+        if (payload == null) return;
+
+        final model = NotificationModel.fromJson(json.decode(payload));
+        _foregroundMessageSubject.add(model);
       },
     );
   }
 
   void _listenToNotifications() {
     FirebaseMessaging.onMessage.listen((event) {
-      sendLocalNotification(event);
+      sendLocalNotification(NotificationModel.fromRemoteMessage(event));
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
@@ -60,7 +68,7 @@ class NotificationDataRepository implements NotificationRepository {
     return _messaging.getInitialMessage();
   }
 
-  void sendLocalNotification(RemoteMessage message) async {
+  void sendLocalNotification(NotificationModel message) async {
     const androidDetails = AndroidNotificationDetails(
       'main',
       'Main',
@@ -72,10 +80,10 @@ class NotificationDataRepository implements NotificationRepository {
 
     await _localNotif.show(
       0,
-      message.notification!.title,
-      message.notification!.body,
+      message.title,
+      message.body ?? "",
       notifDetails,
-      payload: message.notification!.title,
+      payload: jsonEncode(message.toJson()),
     );
   }
 }

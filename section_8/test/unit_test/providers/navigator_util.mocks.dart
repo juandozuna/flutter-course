@@ -2,17 +2,16 @@
 // in section_8/test/unit_test/providers/navigator_util.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i10;
-import 'dart:ui' as _i11;
+import 'dart:async' as _i9;
+import 'dart:ui' as _i10;
 
-import 'package:flutter/foundation.dart' as _i7;
-import 'package:flutter/rendering.dart' as _i3;
-import 'package:flutter/scheduler.dart' as _i8;
+import 'package:flutter/foundation.dart' as _i3;
+import 'package:flutter/scheduler.dart' as _i7;
 import 'package:flutter/src/widgets/basic.dart' as _i4;
 import 'package:flutter/src/widgets/focus_manager.dart' as _i2;
 import 'package:flutter/src/widgets/framework.dart' as _i6;
 import 'package:flutter/src/widgets/navigator.dart' as _i5;
-import 'package:flutter/src/widgets/restoration.dart' as _i9;
+import 'package:flutter/src/widgets/restoration.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -51,12 +50,12 @@ class _FakeWidget_4 extends _i1.Fake implements _i6.Widget {
 class _FakeDiagnosticsNode_5 extends _i1.Fake implements _i3.DiagnosticsNode {
   @override
   String toString(
-          {_i7.TextTreeConfiguration? parentConfiguration,
+          {_i3.TextTreeConfiguration? parentConfiguration,
           _i3.DiagnosticLevel? minLevel = _i3.DiagnosticLevel.info}) =>
       super.toString();
 }
 
-class _FakeTicker_6 extends _i1.Fake implements _i8.Ticker {
+class _FakeTicker_6 extends _i1.Fake implements _i7.Ticker {
   @override
   String toString({bool? debugIncludeStack = false}) => super.toString();
 }
@@ -101,12 +100,12 @@ class MockNavigatorState extends _i1.Mock implements _i5.NavigatorState {
   void initState() => super.noSuchMethod(Invocation.method(#initState, []),
       returnValueForMissingStub: null);
   @override
-  void restoreState(_i9.RestorationBucket? oldBucket, bool? initialRestore) =>
+  void restoreState(_i8.RestorationBucket? oldBucket, bool? initialRestore) =>
       super.noSuchMethod(
           Invocation.method(#restoreState, [oldBucket, initialRestore]),
           returnValueForMissingStub: null);
   @override
-  void didToggleBucket(_i9.RestorationBucket? oldBucket) =>
+  void didToggleBucket(_i8.RestorationBucket? oldBucket) =>
       super.noSuchMethod(Invocation.method(#didToggleBucket, [oldBucket]),
           returnValueForMissingStub: null);
   @override
@@ -127,11 +126,11 @@ class MockNavigatorState extends _i1.Mock implements _i5.NavigatorState {
   void dispose() => super.noSuchMethod(Invocation.method(#dispose, []),
       returnValueForMissingStub: null);
   @override
-  _i10.Future<T?> pushNamed<T extends Object?>(String? routeName,
+  _i9.Future<T?> pushNamed<T extends Object?>(String? routeName,
           {Object? arguments}) =>
       (super.noSuchMethod(
           Invocation.method(#pushNamed, [routeName], {#arguments: arguments}),
-          returnValue: Future<T?>.value()) as _i10.Future<T?>);
+          returnValue: Future<T?>.value()) as _i9.Future<T?>);
   @override
   String restorablePushNamed<T extends Object?>(String? routeName,
           {Object? arguments}) =>
@@ -140,14 +139,14 @@ class MockNavigatorState extends _i1.Mock implements _i5.NavigatorState {
               #restorablePushNamed, [routeName], {#arguments: arguments}),
           returnValue: '') as String);
   @override
-  _i10.Future<T?> pushReplacementNamed<T extends Object?, TO extends Object?>(
+  _i9.Future<T?> pushReplacementNamed<T extends Object?, TO extends Object?>(
           String? routeName,
           {TO? result,
           Object? arguments}) =>
       (super.noSuchMethod(
           Invocation.method(#pushReplacementNamed, [routeName],
               {#result: result, #arguments: arguments}),
-          returnValue: Future<T?>.value()) as _i10.Future<T?>);
+          returnValue: Future<T?>.value()) as _i9.Future<T?>);
   @override
   String restorablePushReplacementNamed<T extends Object?, TO extends Object?>(
           String? routeName,
@@ -158,14 +157,14 @@ class MockNavigatorState extends _i1.Mock implements _i5.NavigatorState {
               {#result: result, #arguments: arguments}),
           returnValue: '') as String);
   @override
-  _i10.Future<T?> popAndPushNamed<T extends Object?, TO extends Object?>(
+  _i9.Future<T?> popAndPushNamed<T extends Object?, TO extends Object?>(
           String? routeName,
           {TO? result,
           Object? arguments}) =>
       (super.noSuchMethod(
           Invocation.method(#popAndPushNamed, [routeName],
               {#result: result, #arguments: arguments}),
-          returnValue: Future<T?>.value()) as _i10.Future<T?>);
+          returnValue: Future<T?>.value()) as _i9.Future<T?>);
   @override
   String restorablePopAndPushNamed<T extends Object?, TO extends Object?>(
           String? routeName,
@@ -176,13 +175,13 @@ class MockNavigatorState extends _i1.Mock implements _i5.NavigatorState {
               {#result: result, #arguments: arguments}),
           returnValue: '') as String);
   @override
-  _i10.Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
+  _i9.Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
           String? newRouteName, _i5.RoutePredicate? predicate,
           {Object? arguments}) =>
       (super.noSuchMethod(
           Invocation.method(#pushNamedAndRemoveUntil, [newRouteName, predicate],
               {#arguments: arguments}),
-          returnValue: Future<T?>.value()) as _i10.Future<T?>);
+          returnValue: Future<T?>.value()) as _i9.Future<T?>);
   @override
   String restorablePushNamedAndRemoveUntil<T extends Object?>(
           String? newRouteName, _i5.RoutePredicate? predicate,
@@ -192,9 +191,9 @@ class MockNavigatorState extends _i1.Mock implements _i5.NavigatorState {
               [newRouteName, predicate], {#arguments: arguments}),
           returnValue: '') as String);
   @override
-  _i10.Future<T?> push<T extends Object?>(_i5.Route<T>? route) =>
+  _i9.Future<T?> push<T extends Object?>(_i5.Route<T>? route) =>
       (super.noSuchMethod(Invocation.method(#push, [route]),
-          returnValue: Future<T?>.value()) as _i10.Future<T?>);
+          returnValue: Future<T?>.value()) as _i9.Future<T?>);
   @override
   String restorablePush<T extends Object?>(
           _i5.RestorableRouteBuilder<T>? routeBuilder,
@@ -204,12 +203,12 @@ class MockNavigatorState extends _i1.Mock implements _i5.NavigatorState {
               #restorablePush, [routeBuilder], {#arguments: arguments}),
           returnValue: '') as String);
   @override
-  _i10.Future<T?> pushReplacement<T extends Object?, TO extends Object?>(
+  _i9.Future<T?> pushReplacement<T extends Object?, TO extends Object?>(
           _i5.Route<T>? newRoute,
           {TO? result}) =>
       (super.noSuchMethod(
           Invocation.method(#pushReplacement, [newRoute], {#result: result}),
-          returnValue: Future<T?>.value()) as _i10.Future<T?>);
+          returnValue: Future<T?>.value()) as _i9.Future<T?>);
   @override
   String restorablePushReplacement<T extends Object?, TO extends Object?>(
           _i5.RestorableRouteBuilder<T>? routeBuilder,
@@ -220,11 +219,11 @@ class MockNavigatorState extends _i1.Mock implements _i5.NavigatorState {
               {#result: result, #arguments: arguments}),
           returnValue: '') as String);
   @override
-  _i10.Future<T?> pushAndRemoveUntil<T extends Object?>(
+  _i9.Future<T?> pushAndRemoveUntil<T extends Object?>(
           _i5.Route<T>? newRoute, _i5.RoutePredicate? predicate) =>
       (super.noSuchMethod(
           Invocation.method(#pushAndRemoveUntil, [newRoute, predicate]),
-          returnValue: Future<T?>.value()) as _i10.Future<T?>);
+          returnValue: Future<T?>.value()) as _i9.Future<T?>);
   @override
   String restorablePushAndRemoveUntil<T extends Object?>(
           _i5.RestorableRouteBuilder<T>? newRouteBuilder,
@@ -277,9 +276,9 @@ class MockNavigatorState extends _i1.Mock implements _i5.NavigatorState {
       (super.noSuchMethod(Invocation.method(#canPop, []), returnValue: false)
           as bool);
   @override
-  _i10.Future<bool> maybePop<T extends Object?>([T? result]) =>
+  _i9.Future<bool> maybePop<T extends Object?>([T? result]) =>
       (super.noSuchMethod(Invocation.method(#maybePop, [result]),
-          returnValue: Future<bool>.value(false)) as _i10.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i9.Future<bool>);
   @override
   void pop<T extends Object?>([T? result]) =>
       super.noSuchMethod(Invocation.method(#pop, [result]),
@@ -316,7 +315,7 @@ class MockNavigatorState extends _i1.Mock implements _i5.NavigatorState {
   void reassemble() => super.noSuchMethod(Invocation.method(#reassemble, []),
       returnValueForMissingStub: null);
   @override
-  void setState(_i11.VoidCallback? fn) =>
+  void setState(_i10.VoidCallback? fn) =>
       super.noSuchMethod(Invocation.method(#setState, [fn]),
           returnValueForMissingStub: null);
   @override
@@ -332,23 +331,23 @@ class MockNavigatorState extends _i1.Mock implements _i5.NavigatorState {
       as String);
   @override
   _i3.DiagnosticsNode toDiagnosticsNode(
-          {String? name, _i7.DiagnosticsTreeStyle? style}) =>
+          {String? name, _i3.DiagnosticsTreeStyle? style}) =>
       (super.noSuchMethod(
           Invocation.method(
               #toDiagnosticsNode, [], {#name: name, #style: style}),
           returnValue: _FakeDiagnosticsNode_5()) as _i3.DiagnosticsNode);
   @override
-  _i8.Ticker createTicker(_i8.TickerCallback? onTick) =>
+  _i7.Ticker createTicker(_i7.TickerCallback? onTick) =>
       (super.noSuchMethod(Invocation.method(#createTicker, [onTick]),
-          returnValue: _FakeTicker_6()) as _i8.Ticker);
+          returnValue: _FakeTicker_6()) as _i7.Ticker);
   @override
   void registerForRestoration(
-          _i9.RestorableProperty<Object?>? property, String? restorationId) =>
+          _i8.RestorableProperty<Object?>? property, String? restorationId) =>
       super.noSuchMethod(
           Invocation.method(#registerForRestoration, [property, restorationId]),
           returnValueForMissingStub: null);
   @override
-  void unregisterFromRestoration(_i9.RestorableProperty<Object?>? property) =>
+  void unregisterFromRestoration(_i8.RestorableProperty<Object?>? property) =>
       super.noSuchMethod(
           Invocation.method(#unregisterFromRestoration, [property]),
           returnValueForMissingStub: null);
